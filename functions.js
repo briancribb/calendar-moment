@@ -15,73 +15,95 @@ $(document).ready(function() {
 	*/
 
 	var monthToBuild = moment("02-01-2014", "MM-DD-YYYY");
-	buildCalendar( $('#calendar'), monthToBuild);
+	calendarMoment( $('#calendar'), monthToBuild);
 });
 
+var calendarMoment = function($targetCalendar, targetMoment) {
+	var headerString = '<header class="calendar_header"><div class="calendar_title"></div><nav id="calendar_nav" class="calendar_nav"><button class="prev"><< Prev</button><button class="now">Now</button><button class="next">Next >></button></nav></header>',
+		weekdayString = '<ul class="weekdays"><li>Sunday</li><li>Monday</li><li>Tuesday</li><li>Wednesday</li><li>Thursday</li><li>Friday</li><li>Saturday</li></ul>',
+		weeksString = '<section class="weeks"></section>';
 
-function buildCalendar($targetCalendar, currentMoment) {
-	var calendarString = '<ul class="weekdays"><li>Sunday</li><li>Monday</li><li>Tuesday</li><li>Wednesday</li><li>Thursday</li><li>Friday</li><li>Saturday</li></ul>';
+		$targetCalendar.html( headerString + weekdayString + weeksString );
+	/*
+	console.log('Current year was: ' + currentMoment.year() );
+	console.log('Current month was: ' + currentMoment.month() );
+	currentMoment.month( currentMoment.month() + 15 );
+	console.log('Current month is: ' + currentMoment.month() );
+	console.log('Current year is: ' + currentMoment.year() );
+	*/
+	var buildCalendar = function() {
+		var currentMoment = targetMoment.clone();
+		console.log('Current month is: ' + targetMoment.month() );
+		var currentMoment = targetMoment.clone(),
+			calendarString = '',
+			thisMonth = currentMoment.month(),
+			daysInThisMonth = currentMoment.daysInMonth(),
+			firstWeekdayNum = currentMoment.date(1).weekday(),
+			lastWeekdayNum = currentMoment.date( currentMoment.daysInMonth() ).weekday(),
+			beforeMonth = false,
+			afterMonth = false;
+
+		var today = targetMoment.date(),
+			firstDay = 1 - firstWeekdayNum,
+			lastDay = (6 - lastWeekdayNum) + daysInThisMonth, // calendar starts at 1, not zero.
+			currentDay = firstDay,
+			totalDays = lastDay + firstWeekdayNum;
+
+		calendarString += '<ul class="days">';
+
+		for (var i = 0; i < totalDays; i++) {
+			var extraClasses = '',
+				dayDisplayed = currentDay,
+				outOfRangeDate = 0;
+
+			beforeMonth = (currentDay < 1) ? true : false;
+			afterMonth = (currentDay > daysInThisMonth) ? true : false;
 
 
+			if (beforeMonth) {
+				outOfRangeDate = moment(currentMoment.date(currentDay)).date();
+				extraClasses += ' out_of_range';
+				dayDisplayed = outOfRangeDate;
+			}
 
-	var thisMonth = currentMoment.month(),
-		daysInThisMonth = currentMoment.daysInMonth(),
-		firstWeekdayNum = currentMoment.date(1).weekday(),
-		lastWeekdayNum = currentMoment.date( currentMoment.daysInMonth() ).weekday(),
-		beforeMonth = false,
-		afterMonth = false;
+			if (afterMonth) {
+				var outOfRangeDate = currentDay - daysInThisMonth;
+				extraClasses += ' out_of_range';
+				dayDisplayed = outOfRangeDate;
+			}
 
-	var firstDay = 1 - firstWeekdayNum,
-		lastDay = (6 - lastWeekdayNum) + daysInThisMonth, // calendar starts at 1, not zero.
-		currentDay = firstDay,
-		totalDays = lastDay + firstWeekdayNum;
+			//console.log('outOfRangeDate = ' + outOfRangeDate);
 
-	calendarString += '<ul class="days">';
+			var dayString =	'<li class="calendar-day' + extraClasses + '">' + 
+								'<div class="day_cell">' + 
+									'<span class="day">' + moment.weekdaysShort(currentDay) + ', </span>' + 
+									'<span class="month">Dec</span>' + 
+									'<span class="date"> ' + dayDisplayed + '</span>' + 
+								'</div>' + 
+							'</li>';
 
-
-	for (var i = 0; i < totalDays; i++) {
-		var extraClasses = '',
-			dayDisplayed = currentDay,
-			outOfRangeDate = 0;
-
-		beforeMonth = (currentDay < 1) ? true : false;
-		afterMonth = (currentDay > daysInThisMonth) ? true : false;
-
-
-		if (beforeMonth) {
-			outOfRangeDate = moment(currentMoment.date(currentDay)).date();
-			extraClasses += ' out_of_range';
-			dayDisplayed = outOfRangeDate;
+			if ( (i +1) % 7 === 0 && currentDay < daysInThisMonth) {
+				dayString += '</ul><ul class="days">';
+			}
+			currentDay ++;
+			calendarString += dayString;
 		}
-
-		if (afterMonth) {
-			var outOfRangeDate = currentDay - daysInThisMonth;
-			extraClasses += ' out_of_range';
-			dayDisplayed = outOfRangeDate;
-		}
-
-		//console.log('outOfRangeDate = ' + outOfRangeDate);
-
-		var dayString =	'<li class="calendar-day' + extraClasses + '">' + 
-							'<div class="day_cell">' + 
-								'<span class="day">' + moment.weekdaysShort(currentDay) + ', </span>' + 
-								'<span class="month">Dec</span>' + 
-								'<span class="date"> ' + dayDisplayed + '</span>' + 
-							'</div>' + 
-						'</li>';
-
-		if ( (i +1) % 7 === 0 && currentDay < daysInThisMonth) {
-			dayString += '</ul><ul class="days">';
-		}
-		currentDay ++;
-		calendarString += dayString;
+		calendarString +=  '</ul>';
+		$targetCalendar.find('.calendar_title').html( targetMoment.format("MMMM, YYYY") );
+		$targetCalendar.find('.weeks').html(calendarString);
 	}
+	buildCalendar();
 
-
-
-	calendarString +=  '</ul>';
-
-	$targetCalendar.html(calendarString);
+	$( "#calendar_nav" ).on( "click", "button", function( event ) {
+		if ( $(this).hasClass('prev') ) {
+			targetMoment.month( targetMoment.month() - 1 );
+		} else if ( $(this).hasClass('next') ) {
+			targetMoment.month( targetMoment.month() + 1 );
+		} else {
+			targetMoment = moment();
+		}
+		buildCalendar();
+	});
 
 }
 

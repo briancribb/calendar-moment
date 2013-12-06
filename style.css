@@ -4,8 +4,42 @@ ul {
 	margin:0;
 	padding:0;
 }
-
+.calendar_header {
+	display: block;
+	width:100%;
+	margin-bottom: 10px;
+}
+.calendar_header:after, .calendar:after, .weekdays:after, .days:after {
+	content:"";
+	display:table;
+	clear:both;
+}
+	.calendar_title {
+		font-size:1.5em;
+		float:left;
+	}
+	.calendar_nav {
+		width:200px;
+		display:block;
+		float:right;
+		margin-right: 10px;
+	}
+	.calendar_nav button {
+		width:33.3333%;
+		height:25px;
+		float:left;
+		margin:0;
+		padding:0;
+		background: #ddd;
+	}
+	.calendar_nav button.prev {
+		border-radius: 7px 0 0 7px;
+	}
+	.calendar_nav button.next {
+		border-radius: 0  7px 7px 0;
+	}
 .calendar {
+	clear:both;
 	max-width: 1000px;
 	display: block;
 	margin: 0 auto;
@@ -45,7 +79,15 @@ ul {
 
 
 @media only screen and (max-width : 768px) {
-
+	.calendar_title {
+		float:none;
+		text-align: center;
+		margin-bottom:10px;
+	}
+	.calendar_nav {
+		float:none;
+		margin: 0 auto;
+	}
 	.calendar .weekdays{
 		display: none;
 	}
