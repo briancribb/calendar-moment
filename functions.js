@@ -52,27 +52,20 @@ var calendarMoment = function($targetCalendar, targetMoment) {
 		calendarString += '<ul class="days">';
 
 		for (var i = 0; i < totalDays; i++) {
-			//console.log( 'The current Moment is: ' + currentMoment.format("MMMM, Do, YYYY") );
-			console.log( 'dayCounter = ' + dayCounter );
-
-			var extraClasses = '',
-				dateDisplayed = '',
+			var extraClasses = '';
 
 			beforeMonth = (dayCounter < 1) ? true : false;
 			afterMonth = (dayCounter > daysInThisMonth) ? true : false;
 
-
 			if (beforeMonth || afterMonth) {
 				extraClasses += ' out_of_range';
 			}
-			dateDisplayed = currentMoment.format("D");
-
 
 			var dayString =	'<li class="calendar-day' + extraClasses + '">' + 
 								'<div class="day_cell">' + 
-									'<span class="day">' + moment.weekdaysShort(dayCounter) + ', </span>' + 
-									'<span class="month">Dec</span>' + 
-									'<span class="date"> ' + dateDisplayed + '</span>' + 
+									'<span class="day">' + currentMoment.format("dddd") + ', </span>' + 
+									'<span class="month">' + currentMoment.format("MMM") + '</span>' + 
+									'<span class="date"> ' + currentMoment.format("Do") + '</span>' + 
 								'</div>' + 
 							'</li>';
 
