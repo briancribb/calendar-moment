@@ -14,16 +14,19 @@ $(document).ready(function() {
 	console.log(' ================================== ');
 	*/
 
-	var monthToBuild = moment("02-01-2014", "MM-DD-YYYY");
+	var monthToBuild = moment();
 	calendarMoment( $('#calendar'), monthToBuild);
 });
 
-var calendarMoment = function($targetCalendar, targetMoment) {
-	var headerString = '<header class="calendar_header"><div class="calendar_title"></div><nav id="calendar_nav" class="calendar_nav"><button class="prev"><< Prev</button><button class="now">Now</button><button class="next">Next >></button></nav></header>',
+var calendarMoment = function($targetCalendar, targetMoment, calendarData) {
+	var headerString = '<header class="cm_header"><div class="cm_title"></div><nav id="cm_nav" class="cm_nav"><button class="cm_prev" disabled><< Prev</button><button class="cm_now" disabled>Now</button><button class="cm_next" disabled>Next >></button></nav></header>',
 		weekdayString = '<ul class="weekdays"><li>Sunday</li><li>Monday</li><li>Tuesday</li><li>Wednesday</li><li>Thursday</li><li>Friday</li><li>Saturday</li></ul>',
 		weeksString = '<section class="weeks"></section>';
 
-		$targetCalendar.html( headerString + weekdayString + weeksString );
+		$targetCalendar.addClass('cm').html( headerString + weekdayString + weeksString );
+		var $btnPrev = $targetCalendar.find('#cm_nav .cm_prev'),
+			$btnNow = $targetCalendar.find('#cm_nav .cm_now'),
+			$btnNext = $targetCalendar.find('#cm_nav .cm_next');
 	/*
 	console.log('Current year was: ' + currentMoment.year() );
 	console.log('Current month was: ' + currentMoment.month() );
@@ -61,7 +64,7 @@ var calendarMoment = function($targetCalendar, targetMoment) {
 				extraClasses += ' out_of_range';
 			}
 
-			var dayString =	'<li class="calendar-day' + extraClasses + '">' + 
+			var dayString =	'<li class="cm_day' + extraClasses + '">' + 
 								'<div class="day_cell">' + 
 									'<span class="day">' + currentMoment.format("dddd") + ', </span>' + 
 									'<span class="month">' + currentMoment.format("MMM") + '</span>' + 
@@ -78,15 +81,38 @@ var calendarMoment = function($targetCalendar, targetMoment) {
 			currentMoment.add('days', 1);
 		}
 		calendarString +=  '</ul>';
-		$targetCalendar.find('.calendar_title').html( targetMoment.format("MMMM, YYYY") );
+		$targetCalendar.find('.cm_title').html( targetMoment.format("MMMM, YYYY") );
 		$targetCalendar.find('.weeks').html(calendarString);
+
+
+		// Check buttons to see if they should be enabled.
+		var rightNow = moment();
+		if ( targetMoment.month() ===  rightNow.month() ) {
+			$btnPrev.prop('disabled', true);
+			$btnNow.prop('disabled', true);
+			$btnNext.prop('disabled', false);
+		}
+
+		else if ( moment( targetMoment ).isBefore( rightNow ) ) {
+			$btnPrev.prop('disabled', true);
+			$btnNow.prop('disabled', false);
+			$btnNext.prop('disabled', false);
+		}
+
+		else if ( moment( targetMoment ).isAfter( rightNow ) ) {
+			$btnPrev.prop('disabled', false);
+			$btnNow.prop('disabled', false);
+			$btnNext.prop('disabled', false);
+		}
+
+
 	}
 	buildCalendar();
 
-	$( "#calendar_nav" ).on( "click", "button", function( event ) {
-		if ( $(this).hasClass('prev') ) {
+	$( "#cm_nav" ).on( "click", "button", function( event ) {
+		if ( $(this).hasClass('cm_prev') ) {
 			targetMoment.month( targetMoment.month() - 1 );
-		} else if ( $(this).hasClass('next') ) {
+		} else if ( $(this).hasClass('cm_next') ) {
 			targetMoment.month( targetMoment.month() + 1 );
 		} else {
 			targetMoment = moment();
@@ -97,8 +123,7 @@ var calendarMoment = function($targetCalendar, targetMoment) {
 }
 
 
-// Another function I'll use later, when I have more content.
-
+// Another function I might use later, when I have more content.
 function equalHeight(group) {
 	var tallest = 0;
 	group.each(function() {

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Calendar List</title>
+		<!-- <link rel="stylesheet" href="css/style.css"> -->
+	</head>
+	<body>
+
+		<div id='calendar'></div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script>
+			"use strict"; // Using strict, because it's a good habit.
+			$(document).ready(function() {
+				/*
+				var monthNames = { 
+					'00' : 'January',
+					'01' : 'February',
+					'02' : 'March',
+					'03' : 'April',
+					'04' : 'May',
+					'05' : 'June',
+					'06' : 'July',
+					'07' : 'August',
+					'08' : 'September',
+					'09' : 'October',
+					'10' : 'November',
+					'11' : 'December'
+				};
+				*/
+				var monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December']
+				var monthNamesAbbr = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+
+				var calendarURL = "http://www.google.com/calendar/feeds/6pi6unl78vjp0ri778qsna4ai0@group.calendar.google.com/public/full?alt=json&orderby=starttime&max-results=4&singleevents=true&sortorder=ascending&futureevents=true";
+
+				$.when( $.ajax(calendarURL) ).then( function myFunc(data) {
+					var json = data.feed.entry;
+					var startDate = formattedDate( json[0].gd$when[0].startTime );
+					var endDate = formattedDate( json[0].gd$when[0].endTime );
+					var testDateSpan = formattedDateSpan( json[0].gd$when[0].startTime, json[0].gd$when[0].endTime );
+					//var testDateSpan = formattedDateSpan( '2013-12-27', '2013-12-30' ) 
+
+					//console.log('startDate = ' + startDate);
+					//console.log('endDate = ' + endDate);
+					console.log(json[0]);
+					console.log( "========================================================" );
+					$.each(json, function(i, item) {
+
+						var mapString = json[i].gd$where[0].valueString;
+						//mapString = mapString.replace(/\s/gi, '+');
+						var mapLink = "http://maps.google.com/maps?q=" + ( mapString.replace(/\s/gi, '+') ) + "&hl=en";
+
+						console.log( "i: " + i );
+						console.log( "htmlLink: " + JSON.stringify(json[i].link[0].href) );
+						console.log( "map link: " + mapLink );
+
+
+						console.log( "Title: " + JSON.stringify(json[i].title.$t) );
+						console.log( "Description: " + JSON.stringify(json[i].content.$t) );
+						console.log( "Where: " + JSON.stringify(json[i].gd$where[0].valueString) );
+						//console.log( "Start: " + JSON.stringify(json[i].gd$when[0].startTime) );
+						//console.log( "End: " + JSON.stringify(json[i].gd$when[0].endTime) );
+						console.log( "Start: " + formattedDate( json[i].gd$when[0].startTime ) );
+						console.log( "End: " + formattedDate( json[i].gd$when[0].endTime ) );
+						console.log( "testDateSpan: " + formattedDateSpan( json[i].gd$when[0].startTime, json[i].gd$when[0].endTime ) );
+						console.log( "========================================================" );
+					});
+
+					function formattedDate(myDateString) {
+						var myDate = new Date( myDateString );
+						var myString =	monthNamesAbbr[ myDate.getMonth() ] + ' ' + myDate.getUTCDate() + ', ' + myDate.getFullYear();
+						return myString;
+					}
+
+					function formattedDateSpan(startDateString, endDateString) {
+						var myStartDate = new Date( startDateString ),
+							myEndDate = new Date( endDateString );
+
+						//var myString = "Dec 5-7, 2014";
+						//var myString = "Dec 5, 2013 - Jan 1, 2014";
+						var myString =	monthNamesAbbr[ myStartDate.getMonth() ] + ' ' + myStartDate.getUTCDate();
+
+						if (  myStartDate.getMonth() === myEndDate.getMonth() ) {
+							//If within the same month.
+							myString += '-' + myEndDate.getUTCDate() + ', ' + myEndDate.getFullYear();
+						} else {
+							// Not the same month.
+
+							if (  myStartDate.getFullYear() === myEndDate.getFullYear() ) {
+								// if in the same year
+								console.log('myStartDate.getFullYear() = ' + myStartDate.getFullYear());
+								var startYear = '';
+							} else {
+								console.log('myEndDate.getFullYear() = ' + myEndDate.getFullYear());
+								var startYear = ', ' + myStartDate.getFullYear();
+							}
+							myString += startYear + ' - ' + monthNamesAbbr[ myEndDate.getMonth() ] + ' ' + myEndDate.getUTCDate() + ', ' + myEndDate.getFullYear();
+						}
+
+
+						return myString;
+					}
+
+
+
+				} , myFailure);
+
+				function myFailure() {
+					console.log( "The data failed somehow." );
+				}		
+
+			});
+
+			//http://www.google.com/calendar/feeds/6pi6unl78vjp0ri778qsna4ai0@group.calendar.google.com/public/full?alt=json&orderby=starttime&max-results=15&singleevents=true&sortorder=ascending&futureevents=true
+		</script>
+
+	</body>
+</html>

@@ -4,27 +4,27 @@ ul {
 	margin:0;
 	padding:0;
 }
-.calendar_header {
+.cm_header {
 	display: block;
 	width:100%;
 	margin-bottom: 10px;
 }
-.calendar_header:after, .calendar:after, .weekdays:after, .days:after {
+.cm_header:after, .cm:after, .weekdays:after, .days:after {
 	content:"";
 	display:table;
 	clear:both;
 }
-	.calendar_title {
+	.cm_title {
 		font-size:1.5em;
 		float:left;
 	}
-	.calendar_nav {
+	.cm_nav {
 		width:200px;
 		display:block;
 		float:right;
 		margin-right: 10px;
 	}
-	.calendar_nav button {
+	.cm_nav button {
 		width:33.3333%;
 		height:25px;
 		float:left;
@@ -32,20 +32,20 @@ ul {
 		padding:0;
 		background: #ddd;
 	}
-	.calendar_nav button.prev {
+	.cm_nav button.prev {
 		border-radius: 7px 0 0 7px;
 	}
-	.calendar_nav button.next {
+	.cm_nav button.next {
 		border-radius: 0  7px 7px 0;
 	}
-.calendar {
+.cm {
 	clear:both;
 	max-width: 1000px;
 	display: block;
 	margin: 0 auto;
 }
 
-.calendar li {
+.cm li {
 	list-style-type: none;
 	box-sizing: border-box;
 	width: 14.2857142857%;
@@ -60,10 +60,10 @@ ul {
 .days li {
 	min-height:100px;
 }
-.calendar li .day, .calendar li .month {
+.cm li .day, .cm li .month {
 	display: none;
 }
-.calendar li.out_of_range {
+.cm li.out_of_range {
 	background-color: #F5F5F5;
 	color: #666;
 }
@@ -71,7 +71,7 @@ ul {
 .weekdays {
 	text-align: center;
 }
-.calendar .day_cell {
+.cm .day_cell {
 	text-align: right;
 	margin-bottom: 5px;
 }
@@ -79,33 +79,33 @@ ul {
 
 
 @media only screen and (max-width : 768px) {
-	.calendar_title {
+	.cm_title {
 		float:none;
 		text-align: center;
 		margin-bottom:10px;
 	}
-	.calendar_nav {
+	.cm_nav {
 		float:none;
 		margin: 0 auto;
 	}
-	.calendar .weekdays{
+	.cm .weekdays{
 		display: none;
 	}
-	.calendar .day_cell {
+	.cm .day_cell {
 		text-align: center;
 	}
-	.calendar li{
+	.cm li{
 		height: auto!important;
 		border: 1px solid #ededed;
 		width: 100%;
 		padding: 10px;
 		margin-bottom: -1px;
 	}
-	.calendar li .day, .calendar li .month{
+	.cm li .day, .cm li .month{
 		display: inline;
 	}
 
-	.calendar li.out_of_range, .calendar li.empty {
+	.cm li.out_of_range, .cm li.empty {
 		display: none;
 	}
 }
