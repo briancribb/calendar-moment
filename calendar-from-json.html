@@ -32,38 +32,36 @@
 				var monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December']
 				var monthNamesAbbr = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
 
-				var calendarURL = "http://www.google.com/calendar/feeds/6pi6unl78vjp0ri778qsna4ai0@group.calendar.google.com/public/full?alt=json&orderby=starttime&max-results=4&singleevents=true&sortorder=ascending&futureevents=true";
+				//var calendarURL = "http://www.google.com/calendar/feeds/08n518qub05rj72r44h2et57i4%40group.calendar.google.com/public/full?alt=json&orderby=starttime&max-results=4&singleevents=true&sortorder=ascending&futureevents=true";
+				var calendarURL = "https://www.google.com/calendar/feeds/08n518qub05rj72r44h2et57i4%40group.calendar.google.com/public/full?alt=json&orderby=starttime&max-results=4&singleevents=true&sortorder=ascending&futureevents=true";
 
 				$.when( $.ajax(calendarURL) ).then( function myFunc(data) {
 					var json = data.feed.entry;
-					var startDate = formattedDate( json[0].gd$when[0].startTime );
-					var endDate = formattedDate( json[0].gd$when[0].endTime );
-					var testDateSpan = formattedDateSpan( json[0].gd$when[0].startTime, json[0].gd$when[0].endTime );
+					console.log(json);
 					//var testDateSpan = formattedDateSpan( '2013-12-27', '2013-12-30' ) 
 
-					//console.log('startDate = ' + startDate);
-					//console.log('endDate = ' + endDate);
-					console.log(json[0]);
 					console.log( "========================================================" );
 					$.each(json, function(i, item) {
-
-						var mapString = json[i].gd$where[0].valueString;
+						console.log('item:');
+						console.log(item);
+						console.log(' ');
+						var mapString = item.gd$where[0].valueString;
 						//mapString = mapString.replace(/\s/gi, '+');
 						var mapLink = "http://maps.google.com/maps?q=" + ( mapString.replace(/\s/gi, '+') ) + "&hl=en";
 
 						console.log( "i: " + i );
-						console.log( "htmlLink: " + JSON.stringify(json[i].link[0].href) );
+						console.log( "htmlLink: " + JSON.stringify(item.link[0].href) );
 						console.log( "map link: " + mapLink );
 
 
-						console.log( "Title: " + JSON.stringify(json[i].title.$t) );
-						console.log( "Description: " + JSON.stringify(json[i].content.$t) );
-						console.log( "Where: " + JSON.stringify(json[i].gd$where[0].valueString) );
-						//console.log( "Start: " + JSON.stringify(json[i].gd$when[0].startTime) );
-						//console.log( "End: " + JSON.stringify(json[i].gd$when[0].endTime) );
-						console.log( "Start: " + formattedDate( json[i].gd$when[0].startTime ) );
-						console.log( "End: " + formattedDate( json[i].gd$when[0].endTime ) );
-						console.log( "testDateSpan: " + formattedDateSpan( json[i].gd$when[0].startTime, json[i].gd$when[0].endTime ) );
+						console.log( "Title: " + JSON.stringify(item.title.$t) );
+						console.log( "Description: " + JSON.stringify(item.content.$t) );
+						console.log( "Where: " + JSON.stringify(item.gd$where[0].valueString) );
+						//console.log( "Start: " + JSON.stringify(item.gd$when[0].startTime) );
+						//console.log( "End: " + JSON.stringify(item.gd$when[0].endTime) );
+						console.log( "Start: " + formattedDate( item.gd$when[0].startTime ) );
+						console.log( "End: " + formattedDate( item.gd$when[0].endTime ) );
+						console.log( "testDateSpan: " + formattedDateSpan( item.gd$when[0].startTime, item.gd$when[0].endTime ) );
 						console.log( "========================================================" );
 					});
 
