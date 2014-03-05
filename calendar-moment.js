@@ -13,15 +13,16 @@ $(document).ready(function() {
 	console.log(' ================================== ');
 	console.log(' ================================== ');
 	*/
-
-	var monthToBuild = moment();
-	calendarMoment( $('#calendar'), monthToBuild);
+	var calendarData = setupCalendarData(); // From separate file at the moment: calendar-data.js
+	console.log(calendarData);
+	calendarMoment( $('#calendar'), moment(), calendarData);
 });
 
 var calendarMoment = function($targetCalendar, targetMoment, calendarData) {
 	var headerString = '<header class="cm_header"><div class="cm_title"></div><nav id="cm_nav" class="cm_nav"><button class="cm_prev" disabled><< Prev</button><button class="cm_now" disabled>Now</button><button class="cm_next" disabled>Next >></button></nav></header>',
 		weekdayString = '<ul class="weekdays"><li>Sunday</li><li>Monday</li><li>Tuesday</li><li>Wednesday</li><li>Thursday</li><li>Friday</li><li>Saturday</li></ul>',
 		weeksString = '<section class="weeks"></section>';
+		calendarData = calendarData || [];
 
 		$targetCalendar.addClass('cm').html( headerString + weekdayString + weeksString );
 		var $btnPrev = $targetCalendar.find('#cm_nav .cm_prev'),
@@ -35,7 +36,6 @@ var calendarMoment = function($targetCalendar, targetMoment, calendarData) {
 	console.log('Current year is: ' + currentMoment.year() );
 	*/
 	var buildCalendar = function() {
-		var currentMoment = targetMoment.clone();
 		//console.log('Current month is: ' + targetMoment.month() );
 		var currentMoment = targetMoment.clone(),
 			calendarString = '',
@@ -104,9 +104,7 @@ var calendarMoment = function($targetCalendar, targetMoment, calendarData) {
 			$btnNow.prop('disabled', false);
 			$btnNext.prop('disabled', false);
 		}
-
-
-	}
+	};
 	buildCalendar();
 
 	$( "#cm_nav" ).on( "click", "button", function( event ) {
