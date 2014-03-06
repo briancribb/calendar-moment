@@ -24,10 +24,10 @@ var calendarMoment = function($targetCalendar, targetMoment, calendarData) {
 		weeksString = '<section class="weeks"></section>';
 		calendarData = calendarData || [];
 
-		$targetCalendar.addClass('cm').html( headerString + weekdayString + weeksString );
-		var $btnPrev = $targetCalendar.find('#cm_nav .cm_prev'),
-			$btnNow = $targetCalendar.find('#cm_nav .cm_now'),
-			$btnNext = $targetCalendar.find('#cm_nav .cm_next');
+	$targetCalendar.addClass('cm').html( headerString + weekdayString + weeksString );
+	var $btnPrev = $targetCalendar.find('#cm_nav .cm_prev'),
+		$btnNow = $targetCalendar.find('#cm_nav .cm_now'),
+		$btnNext = $targetCalendar.find('#cm_nav .cm_next');
 	/*
 	console.log('Current year was: ' + currentMoment.year() );
 	console.log('Current month was: ' + currentMoment.month() );
