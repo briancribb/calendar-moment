@@ -49,5 +49,11 @@ var setupCalendarData = function() {
 			description:"This is really some kind of test. Totally.",
 		},
 	];
+	for (var i = 0; i < data.length; i++) {
+		data[i].momentStart = moment(data[i].startTime, 'YYYY-MM-DD');;
+		data[i].momentEnd = moment(data[i].endTime, 'YYYY-MM-DD');;
+	}
+
 	return data;
+	console.log(data);
 }

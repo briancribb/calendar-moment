@@ -20,10 +20,10 @@ $(document).ready(function() {
 
 var calendarMoment = function($targetCalendar, targetMoment, calendarData) {
 	var headerString = '<header class="cm_header"><div class="cm_title"></div><nav id="cm_nav" class="cm_nav"><button class="cm_prev" disabled><< Prev</button><button class="cm_now" disabled>Now</button><button class="cm_next" disabled>Next >></button></nav></header>',
-		weekdayString = '<ul class="weekdays"><li>Sunday</li><li>Monday</li><li>Tuesday</li><li>Wednesday</li><li>Thursday</li><li>Friday</li><li>Saturday</li></ul>',
-		weeksString = '<section class="weeks"></section>';
+		weekdayString = '<ul class="cm_weekdays"><li>Sunday</li><li>Monday</li><li>Tuesday</li><li>Wednesday</li><li>Thursday</li><li>Friday</li><li>Saturday</li></ul>',
+		weeksString = '<section class="cm_weeks"></section>';
 		calendarData = calendarData || [];
-
+		
 	$targetCalendar.addClass('cm').html( headerString + weekdayString + weeksString );
 	var $btnPrev = $targetCalendar.find('#cm_nav .cm_prev'),
 		$btnNow = $targetCalendar.find('#cm_nav .cm_now'),
@@ -52,7 +52,7 @@ var calendarMoment = function($targetCalendar, targetMoment, calendarData) {
 
 		currentMoment.date(dayCounter); // Sets currentMoment to whatever previous day appears first on the calendar.
 		
-		calendarString += '<ul class="days">';
+		calendarString += '<ul class="cm_days">';
 
 		for (var i = 0; i < totalDays; i++) {
 			var extraClasses = '';
@@ -65,15 +65,19 @@ var calendarMoment = function($targetCalendar, targetMoment, calendarData) {
 			}
 
 			var dayString =	'<li class="cm_day' + extraClasses + '">' + 
-								'<div class="day_cell">' + 
-									'<span class="day">' + currentMoment.format("dddd") + ', </span>' + 
-									'<span class="month">' + currentMoment.format("MMM") + '</span>' + 
-									'<span class="date"> ' + currentMoment.format("Do") + '</span>' + 
+								'<div class="cm_day-cell">' + 
+									'<span class="cm_day">' + currentMoment.format("dddd") + ', </span>' + 
+									'<span class="cm_month">' + currentMoment.format("MMM") + '</span>' + 
+									'<span class="cm_date"> ' + currentMoment.format("Do") + '</span>' + 
+									'<div class="cm_event">' + 
+									'<a class="cm_event__link" href="http://www.google.com">Event Name</a>' + 
+									'<div class="cm_event-time"></div>' + 
+									'</div>' + 
 								'</div>' + 
 							'</li>';
 
 			if ( (i +1) % 7 === 0 && dayCounter < daysInThisMonth) {
-				dayString += '</ul><ul class="days">';
+				dayString += '</ul><ul class="cm_days">';
 			}
 			dayCounter ++;
 			calendarString += dayString;
@@ -82,7 +86,7 @@ var calendarMoment = function($targetCalendar, targetMoment, calendarData) {
 		}
 		calendarString +=  '</ul>';
 		$targetCalendar.find('.cm_title').html( targetMoment.format("MMMM, YYYY") );
-		$targetCalendar.find('.weeks').html(calendarString);
+		$targetCalendar.find('.cm_weeks').html(calendarString);
 
 
 		// Check buttons to see if they should be enabled.
@@ -107,7 +111,7 @@ var calendarMoment = function($targetCalendar, targetMoment, calendarData) {
 	};
 	buildCalendar();
 
-	$( "#cm_nav" ).on( "click", "button", function( event ) {
+	$targetCalendar.on( "click", "button", function( event ) {
 		if ( $(this).hasClass('cm_prev') ) {
 			targetMoment.month( targetMoment.month() - 1 );
 		} else if ( $(this).hasClass('cm_next') ) {
