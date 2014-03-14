@@ -28,7 +28,7 @@ var calendarMoment = {
 		var currentMoment	= targetMoment.clone(),
 			headerString	= '<header class="cm_header"><div class="cm_title">' + targetMoment.format("MMMM, YYYY") + '</div><nav id="cm_nav" class="cm_nav"><button class="cm_prev" disabled><< Prev</button><button class="cm_now" disabled>Now</button><button class="cm_next" disabled>Next >></button></nav></header>',
 			weekdayString	= '<ul class="cm_weekdays"><li>Sunday</li><li>Monday</li><li>Tuesday</li><li>Wednesday</li><li>Thursday</li><li>Friday</li><li>Saturday</li></ul>',
-			weeksString		= '<section class="cm_weeks">',
+			weeksString		= '<section class="cm_weeks"><ul class="cm_days">',
 			closingString	= '</section>';
 
 		var calendarString	= headerString + weekdayString + weeksString,
@@ -44,12 +44,15 @@ var calendarMoment = {
 			lastDay			= (6 - lastWeekdayNum) + daysInThisMonth, // calendar starts at 1, not zero.
 			totalDays		= lastDay + firstWeekdayNum;
 
+		currentMoment.date(dayCounter); // Sets the first calendar cell to the appropriate day.
+
+
 		for (var i = 0; i < totalDays; i++) {
-			var extraClasses = '';
+			var extraClasses = '',
+				eventString = buildEventString();
 
 			beforeMonth = (dayCounter < 1) ? true : false;
 			afterMonth = (dayCounter > daysInThisMonth) ? true : false;
-
 			if (beforeMonth || afterMonth) {
 				extraClasses += ' out_of_range';
 			}
@@ -59,7 +62,7 @@ var calendarMoment = {
 									'<span class="cm_month">' + currentMoment.format("MMM") + '</span>' + 
 									'<span class="cm_date"> ' + currentMoment.format("Do") + '</span>' + 
 									'<div class="cm_event">' + 
-									'<a class="cm_event__link" href="http://www.google.com">Event Name</a>' + 
+									eventString + 
 									'<div class="cm_event-time"></div>' + 
 									'</div>' + 
 								'</div>' + 
@@ -75,6 +78,27 @@ var calendarMoment = {
 		}
 		calendarString += ('</ul>' + closingString);
 		calendarMoment.$targetCalendar.addClass('cm').html( calendarString );
+
+
+		function buildEventString() {
+			var eventString = '';
+
+			for (var i = 0; i < calendarMoment.events.length; i++) {
+				//var i = 0;
+				//console.log('Loop: i = ' + i);
+				var startMoment = moment(calendarMoment.events[i].startTime),
+					endMoment = moment(calendarMoment.events[i].endTime);
+
+				var test = moment(currentMoment).isBefore(startMoment)
+
+				if ( currentMoment.format("MDYYYY") === startMoment.format("MDYYYY") ) {
+					eventString += '<a class="cm_event__link" href="http://www.google.com">Event Name</a>';
+				}
+			}
+
+
+			return eventString;
+		}
 
 		function buttonCheck() {
 			// Check buttons to see if they should be enabled.
