@@ -61,10 +61,7 @@ var calendarMoment = {
 									'<span class="cm_day">' + currentMoment.format("dddd") + ', </span>' + 
 									'<span class="cm_month">' + currentMoment.format("MMM") + '</span>' + 
 									'<span class="cm_date"> ' + currentMoment.format("Do") + '</span>' + 
-									'<div class="cm_event">' + 
 									eventString + 
-									'<div class="cm_event-time"></div>' + 
-									'</div>' + 
 								'</div>' + 
 							'</li>';
 
@@ -84,15 +81,19 @@ var calendarMoment = {
 			var eventString = '';
 
 			for (var i = 0; i < calendarMoment.events.length; i++) {
-				//var i = 0;
-				//console.log('Loop: i = ' + i);
 				var startMoment = moment(calendarMoment.events[i].startTime),
 					endMoment = moment(calendarMoment.events[i].endTime);
 
-				var test = moment(currentMoment).isBefore(startMoment)
+				//var test = moment(currentMoment).isBefore(startMoment)
 
 				if ( currentMoment.format("MDYYYY") === startMoment.format("MDYYYY") ) {
-					eventString += '<a class="cm_event__link" href="http://www.google.com">Event Name</a>';
+					eventString =	'<div class="cm_event">' + 
+										'<div class="cm_event__title">' + 
+											'<a class="cm_event__link" href="' + calendarMoment.events[i].link + '">' + calendarMoment.events[i].title + '</a>' + 
+											'<div class="cm_event__location">' + calendarMoment.events[i].where + '</div>' + 
+											'<div class="cm_event__desc">' + calendarMoment.events[i].description + '</div>';
+										'</div>' + 
+									'</div>';
 				}
 			}
 
@@ -100,7 +101,7 @@ var calendarMoment = {
 			return eventString;
 		}
 
-		function buttonCheck() {
+		function initBuild() {
 			// Check buttons to see if they should be enabled.
 			var rightNow = moment(),
 				$btnPrev = calendarMoment.$targetCalendar.find('#cm_nav .cm_prev'),
@@ -122,7 +123,22 @@ var calendarMoment = {
 				$btnNow.prop('disabled', false);
 				$btnNext.prop('disabled', false);
 			}
+			calendarMoment.$dayCells = calendarMoment.$targetCalendar.find('.cm_day');
+			calendarMoment.equalHeight();
 		}
-		return buttonCheck();
+		return initBuild();
+	},
+	equalHeight: function() {
+		console.log('equalHeight()');
+		"use strict";
+		var tallest = 0;
+		calendarMoment.$dayCells.each(function() {
+			//$( this ).addClass( "foo" );
+			var thisHeight = $(this).height();
+			if(thisHeight > tallest) {
+				tallest = thisHeight;
+			}
+			calendarMoment.$dayCells.height(tallest);
+		});
 	}
 }
