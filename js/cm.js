@@ -128,17 +128,18 @@ var calendarMoment = {
 		}
 		return initBuild();
 	},
-	equalHeight: function() {
-		console.log('equalHeight()');
+	equalHeight: function(clearValue) {
+		//console.log('equalHeight()');
 		"use strict";
-		var tallest = 0;
-		calendarMoment.$dayCells.each(function() {
-			//$( this ).addClass( "foo" );
-			var thisHeight = $(this).height();
-			if(thisHeight > tallest) {
-				tallest = thisHeight;
-			}
-			calendarMoment.$dayCells.height(tallest);
-		});
+		calendarMoment.$dayCells.removeAttr('style');
+		if (!clearValue) {
+			var tallest = 0;
+			calendarMoment.$dayCells.each(function() {
+				var thisHeight = $(this).height();
+				if(thisHeight > tallest) {
+					tallest = thisHeight;
+				}
+			}).height(tallest);
+		}
 	}
 }
