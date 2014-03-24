@@ -56,6 +56,9 @@ var calendarMoment = {
 			if (beforeMonth || afterMonth) {
 				extraClasses += ' out_of_range';
 			}
+			if (eventString === '') {
+				extraClasses += ' no_event';
+			}
 			var dayString =	'<li class="cm_day' + extraClasses + '">' + 
 								'<div class="cm_day-cell">' + 
 									'<span class="cm_day">' + currentMoment.format("dddd") + ', </span>' + 
@@ -91,7 +94,7 @@ var calendarMoment = {
 										'<div class="cm_event__title">' + 
 											'<a class="cm_event__link" href="' + calendarMoment.events[i].link + '">' + calendarMoment.events[i].title + '</a>' + 
 											'<div class="cm_event__location">' + calendarMoment.events[i].where + '</div>' + 
-											'<div class="cm_event__desc">' + calendarMoment.events[i].description + '</div>';
+											//'<div class="cm_event__desc">' + calendarMoment.events[i].description + '</div>';
 										'</div>' + 
 									'</div>';
 				}

@@ -5,7 +5,7 @@ ul {
 
 .cm {
   clear: both;
-  max-width: 1000px;
+  max-width: 1200px;
   display: block;
   margin: 0 auto;
 }
@@ -65,7 +65,7 @@ ul {
 }
 
 .cm_days li {
-  min-height: 100px;
+  min-height: 120px;
 }
 
 .cm li .cm_day, .cm li .cm_month {
@@ -91,6 +91,9 @@ ul {
 }
 
 @media only screen and (max-width: 768px) {
+  .cm li.out_of_range, .cm li.no_event {
+    display:none;
+  }
   .cm_title {
     float: none;
     text-align: center;
