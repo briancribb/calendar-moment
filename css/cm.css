@@ -88,11 +88,39 @@ ul {
 
 .cm .cm_event {
   text-align: left;
+  padding:5px;
+  margin-right:-5px;
+  margin-left:-5px;
+  background:#cecece;
+  border:1px solid #333;
+}
+
+.cm_date-title {
+  margin-bottom:5px;
+}
+
+.cm_event--start .cm_event {
+  margin-left:5px;
+  border-right:none;
+}
+.cm_event--middle .cm_event {
+  border-right:none;
+  border-left:none;
+}
+.cm_event--end .cm_event {
+  margin-right:5px;
+  border-left:none;
 }
 
 @media only screen and (max-width: 768px) {
   .cm li.out_of_range, .cm li.no_event {
     display: none;
+  }
+
+  .cm_event--start .cm_event, .cm_event--middle .cm_event, .cm_event--end .cm_event {
+    margin-left:5px;
+    margin-right:5px;
+    border:1px solid #333;
   }
 
   .cm_title {

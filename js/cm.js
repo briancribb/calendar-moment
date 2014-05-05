@@ -49,22 +49,27 @@ var calendarMoment = {
 
 		for (var i = 0; i < totalDays; i++) {
 			var extraClasses = '',
-				eventString = buildEventString();
+				calendarEvent = buildEventString();
+			console.log(calendarEvent.eventClass);
 
 			beforeMonth = (dayCounter < 1) ? true : false;
 			afterMonth = (dayCounter > daysInThisMonth) ? true : false;
 			if (beforeMonth || afterMonth) {
 				extraClasses += ' out_of_range';
 			}
-			if (eventString === '') {
+			if (calendarEvent.eventString === '') {
 				extraClasses += ' no_event';
+			} else {
+				extraClasses += calendarEvent.eventClass;
 			}
 			var dayString =	'<li class="cm_day' + extraClasses + '">' + 
 								'<div class="cm_day-cell">' + 
-									'<span class="cm_day">' + currentMoment.format("dddd") + ', </span>' + 
-									'<span class="cm_month">' + currentMoment.format("MMM") + '</span>' + 
-									'<span class="cm_date"> ' + currentMoment.format("Do") + '</span>' + 
-									eventString + 
+									'<div class="cm_date-title">' + 
+										'<span class="cm_day">' + currentMoment.format("dddd") + ', </span>' + 
+										'<span class="cm_month">' + currentMoment.format("MMM") + '</span>' + 
+										'<span class="cm_date"> ' + currentMoment.format("Do") + '</span>' + 
+									'</div>' + 
+									calendarEvent.eventString + 
 								'</div>' + 
 							'</li>';
 
@@ -81,27 +86,39 @@ var calendarMoment = {
 
 
 		function buildEventString() {
-			var eventString = '';
-
+			var eventString = '',
+				eventClass = '';
 			for (var i = 0; i < calendarMoment.events.length; i++) {
-				var startMoment = moment(calendarMoment.events[i].startTime),
-					endMoment = moment(calendarMoment.events[i].endTime);
 
-				//var test = moment(currentMoment).isBefore(startMoment)
+				var eventStartInt		= parseInt( moment(calendarMoment.events[i].startTime).format("YYYYMMDD") ),
+					eventEndInt			= parseInt( moment(calendarMoment.events[i].endTime).format("YYYYMMDD") ),
+					currentMomentInt	= parseInt( currentMoment.format("YYYYMMDD") );
 
-				if ( currentMoment.format("MDYYYY") === startMoment.format("MDYYYY") ) {
+				//console.log('Today is ' + currentMoment.format("M, D, YYYY") );
+
+				if ( currentMomentInt === eventStartInt ) {
+					eventClass = ' cm_event--start';
+				} else if ( currentMomentInt === eventEndInt ) {
+					eventClass = ' cm_event--end';
+				} else if ( currentMomentInt > eventStartInt && currentMomentInt < eventEndInt ) {
+					eventClass = ' cm_event--middle';
+				}
+
+				//console.log('eventStartInt =  ' + eventStartInt + ', currentMomentInt =  ' + currentMomentInt + eventClass);
+				// ' + eventClass + '
+				if ( eventClass !== '' ) {
 					eventString =	'<div class="cm_event">' + 
 										'<div class="cm_event__title">' + 
 											'<a class="cm_event__link" href="' + calendarMoment.events[i].link + '">' + calendarMoment.events[i].title + '</a>' + 
-											'<div class="cm_event__location">' + calendarMoment.events[i].where + '</div>' + 
-											//'<div class="cm_event__desc">' + calendarMoment.events[i].description + '</div>';
 										'</div>' + 
+										'<div class="cm_event__location">' + calendarMoment.events[i].where + '</div>' + 
+										'<div class="cm_event__desc">' + eventClass + '</div>';
 									'</div>';
 				}
 			}
 
 
-			return eventString;
+			return {eventString:eventString, eventClass:eventClass};
 		}
 
 		function initBuild() {
