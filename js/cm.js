@@ -49,8 +49,8 @@ var calendarMoment = {
 
 		for (var i = 0; i < totalDays; i++) {
 			var extraClasses = '',
-				calendarEvent = buildEventString();
-			console.log(calendarEvent.eventClass);
+				calendarEvent = buildEvent( parseInt( currentMoment.format("YYYYMMDD") ) );
+			//console.log(calendarEvent);
 
 			beforeMonth = (dayCounter < 1) ? true : false;
 			afterMonth = (dayCounter > daysInThisMonth) ? true : false;
@@ -85,39 +85,32 @@ var calendarMoment = {
 		calendarMoment.$targetCalendar.addClass('cm').html( calendarString );
 
 
-		function buildEventString() {
+		function buildEvent( currentMomentInt ) {
 			var eventString = '',
-				eventClass = '';
-			for (var i = 0; i < calendarMoment.events.length; i++) {
+				eventClass = '',
+				buildEventObject = function(index, classToAdd) {
+					eventClass = classToAdd;
+					return	'<div class="cm_event">' + 
+								'<div class="cm_event__title">' + 
+									'<a class="cm_event__link" href="' + calendarMoment.events[index].url + '">' + calendarMoment.events[index].title + '</a>' + 
+								'</div>' + 
+								'<div class="cm_event__location">' + calendarMoment.events[index].where + '</div>' + 
+								'<div class="cm_event__desc">' + eventClass + '</div>' + 
+							'</div>';
+				}
 
-				var eventStartInt		= parseInt( moment(calendarMoment.events[i].startTime).format("YYYYMMDD") ),
-					eventEndInt			= parseInt( moment(calendarMoment.events[i].endTime).format("YYYYMMDD") ),
-					currentMomentInt	= parseInt( currentMoment.format("YYYYMMDD") );
-
-				//console.log('Today is ' + currentMoment.format("M, D, YYYY") );
+			for (var j = 0; j < calendarMoment.events.length; j++) {
+				var eventStartInt		= parseInt( moment(calendarMoment.events[j].startTime).format("YYYYMMDD") ),
+					eventEndInt			= parseInt( moment(calendarMoment.events[j].endTime).format("YYYYMMDD") );
 
 				if ( currentMomentInt === eventStartInt ) {
-					eventClass = ' cm_event--start';
+					eventString = buildEventObject(j, ' cm_event--start');
 				} else if ( currentMomentInt === eventEndInt ) {
-					eventClass = ' cm_event--end';
+					eventString = buildEventObject(j, ' cm_event--end');
 				} else if ( currentMomentInt > eventStartInt && currentMomentInt < eventEndInt ) {
-					eventClass = ' cm_event--middle';
-				}
-
-				//console.log('eventStartInt =  ' + eventStartInt + ', currentMomentInt =  ' + currentMomentInt + eventClass);
-				// ' + eventClass + '
-				if ( eventClass !== '' ) {
-					eventString =	'<div class="cm_event">' + 
-										'<div class="cm_event__title">' + 
-											'<a class="cm_event__link" href="' + calendarMoment.events[i].link + '">' + calendarMoment.events[i].title + '</a>' + 
-										'</div>' + 
-										'<div class="cm_event__location">' + calendarMoment.events[i].where + '</div>' + 
-										'<div class="cm_event__desc">' + eventClass + '</div>';
-									'</div>';
+					eventString = buildEventObject(j, ' cm_event--middle');
 				}
 			}
-
-
 			return {eventString:eventString, eventClass:eventClass};
 		}
 
