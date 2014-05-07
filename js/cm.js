@@ -3,7 +3,7 @@ $(document).ready(function() {
 	//console.log(calendarData);
 	calendarMoment.init( $('#calendar'), moment(), calendarData);
 
-	$(window).resize( $.throttle( 250, function() {
+	$(window).resize( $.debounce( 250, function() {
 		//console.log('Resizing.');
 		calendarMoment.equalHeight();
 	} ) );
