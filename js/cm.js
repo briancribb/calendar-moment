@@ -152,7 +152,7 @@ var calendarMoment = {
 		return initBuild();
 	},
 	equalHeight: function(clearValue) {
-		console.log('equalHeight()');
+		//console.log('equalHeight()');
 		"use strict";
 		calendarMoment.$dayCells.removeAttr('style');
 		var tallestDay = 0, tallestEvent = 0;
