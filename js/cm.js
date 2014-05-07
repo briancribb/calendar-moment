@@ -91,11 +91,13 @@ var calendarMoment = {
 				buildEventObject = function(index, classToAdd) {
 					eventClass = classToAdd;
 					return	'<div class="cm_event">' + 
-								'<div class="cm_event__title">' + 
-									'<a class="cm_event__link" href="' + calendarMoment.events[index].url + '">' + calendarMoment.events[index].title + '</a>' + 
+								'<div class="cm_event__content">' + 
+									'<div class="cm_event__title">' + 
+										'<a class="cm_event__link" href="' + calendarMoment.events[index].url + '">' + calendarMoment.events[index].title + '</a>' + 
+									'</div>' + 
+									'<div class="cm_event__location">' + calendarMoment.events[index].where + '</div>' + 
+									'<div class="cm_event__desc">' + eventClass + '</div>' + 
 								'</div>' + 
-								'<div class="cm_event__location">' + calendarMoment.events[index].where + '</div>' + 
-								'<div class="cm_event__desc">' + eventClass + '</div>' + 
 							'</div>';
 				}
 
@@ -137,22 +139,33 @@ var calendarMoment = {
 				$btnNext.prop('disabled', false);
 			}
 			calendarMoment.$dayCells = calendarMoment.$targetCalendar.find('.cm_day');
+			calendarMoment.$eventCells = calendarMoment.$targetCalendar.find('.cm_event');
 			calendarMoment.equalHeight();
 		}
 		return initBuild();
 	},
 	equalHeight: function(clearValue) {
-		//console.log('equalHeight()');
+		console.log('equalHeight()');
 		"use strict";
 		calendarMoment.$dayCells.removeAttr('style');
-		if (!clearValue) {
-			var tallest = 0;
-			calendarMoment.$dayCells.each(function() {
-				var thisHeight = $(this).height();
-				if(thisHeight > tallest) {
-					tallest = thisHeight;
-				}
-			}).height(tallest);
+		var tallestDay = 0, tallestEvent = 0;
+
+		function checkHeight($target) {
+			var thisHeight = $target.height();
+			if(thisHeight > tallestDay) {
+				tallestDay = thisHeight;
+			}
 		}
+		if (clearValue) {
+			calendarMoment.$dayCells.removeAttr('height');
+			calendarMoment.$eventCells.removeAttr('height');
+		}
+		calendarMoment.$eventCells.each(function() {
+			checkHeight( $(this) );
+		}).height(tallestDay);
+
+		calendarMoment.$dayCells.each(function() {
+			checkHeight( $(this) );
+		}).height(tallestDay);
 	}
 }

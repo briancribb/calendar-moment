@@ -1,11 +1,18 @@
 @charset "UTF-8";
 
+$baseFontSize:				14px;
+$colorDayBorder:			#333;
+$colorEventBorder:			#333;
+$colorEventBackground:		#cecece;
+$colorOutOfRange:			#F5F5F5;
+$colorButton:				#ddd;
 ul {
 	margin:0;
 	padding:0;
 }
 
 .cm {
+	font-size: $baseFontSize;
 	clear:both;
 	max-width: 1200px;
 	display: block;
@@ -37,7 +44,7 @@ ul {
 		float:left;
 		margin:0;
 		padding:0;
-		background: #ddd;
+		background: $colorButton;
 	}
 	.cm_nav button.prev {
 		border-radius: 7px 0 0 7px;
@@ -50,10 +57,10 @@ ul {
 	list-style-type: none;
 	box-sizing: border-box;
 	width: 14.2857142857%;
-	//padding: 5px;
+	padding-bottom: 5px;
 	display: block;
 	float: left;
-	border: 1px solid #ccc;
+	border: 1px solid $colorDayBorder;
 	margin-right: -1px;
 	margin-bottom: -1px;
 	overflow: visible!important;
@@ -76,15 +83,23 @@ ul {
 	text-align: right;
 	margin-bottom: 5px;
 }
-.cm .cm_event {
-  text-align: left;
-  padding:5px;
-  background:#cecece;
-  border:1px solid #333;
-}
 
 .cm_date-title {
-	margin-bottom:5px;
+	margin: 5px;
+}
+
+.cm .cm_event {
+	font-size: $baseFontSize*.8;
+	text-align: left;
+	background:$colorEventBackground;
+	border: 1px solid $colorEventBorder;
+}
+	.cm_event__content {
+		padding:5px;
+	}
+
+.cm .cm_event__title {
+	font-size: $baseFontSize*.9;
 }
 
 .cm_event--start .cm_event {
@@ -92,14 +107,31 @@ ul {
   border-right:none;
 }
 .cm_event--middle .cm_event {
-	padding: 5px 10px;
 	border-right:none;
 	border-left:none;
+	margin: 0 -1px;
 }
 .cm_event--end .cm_event {
   margin-right:5px;
   border-left:none;
+  margin-left:-1px;
 }
+
+// Hide text on all but first event.
+.cm_event--middle .cm_event__content, .cm_event--end .cm_event__content {
+	display:none;
+}
+// Except where they're on the sides of the calendar.
+.cm_day:last-of-type.cm_event--middle .cm_event {
+	margin-right:0;
+}
+.cm_day:first-of-type.cm_event--middle .cm_event, .cm_day:first-of-type.cm_event--end .cm_event {
+	margin-left:0;
+}
+.cm_day:first-of-type.cm_event--middle .cm_event__content, .cm_day:first-of-type.cm_event--end .cm_event__content {
+	display:block;
+}
+
 
 @media only screen and (max-width : 768px) {
 	.cm li.out_of_range, .cm li.no_event {
@@ -109,7 +141,7 @@ ul {
 	.cm_event--start .cm_event, .cm_event--middle .cm_event, .cm_event--end .cm_event {
 		margin-left:5px;
 		margin-right:5px;
-		border:1px solid #333;
+		border:1px solid $colorEventBorder;
 	}
 
 	.cm_title {
@@ -129,7 +161,7 @@ ul {
 	}
 	.cm li{
 		height: auto!important;
-		border: 1px solid #ededed;
+		border: 1px solid $colorDayBorder;
 		width: 100%;
 		padding: 10px;
 		margin-bottom: -1px;

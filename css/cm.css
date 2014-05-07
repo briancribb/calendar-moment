@@ -4,6 +4,7 @@ ul {
 }
 
 .cm {
+  font-size: 14px;
   clear: both;
   max-width: 1200px;
   display: block;
@@ -40,7 +41,7 @@ ul {
   float: left;
   margin: 0;
   padding: 0;
-  background: #ddd;
+  background: #dddddd;
 }
 
 .cm_nav button.prev {
@@ -55,9 +56,10 @@ ul {
   list-style-type: none;
   box-sizing: border-box;
   width: 14.2857142857%;
+  padding-bottom: 5px;
   display: block;
   float: left;
-  border: 1px solid #ccc;
+  border: 1px solid #333333;
   margin-right: -1px;
   margin-bottom: -1px;
   overflow: visible !important;
@@ -85,29 +87,56 @@ ul {
   margin-bottom: 5px;
 }
 
-.cm .cm_event {
-  text-align: left;
-  padding:5px;
-  background:#cecece;
-  border:1px solid #333;
+.cm_date-title {
+  margin: 5px;
 }
 
-.cm_date-title {
-  margin-bottom:5px;
+.cm .cm_event {
+  font-size: 11.2px;
+  text-align: left;
+  background: #cecece;
+  border: 1px solid #333333;
+}
+
+.cm_event__content {
+  padding: 5px;
+}
+
+.cm .cm_event__title {
+  font-size: 12.6px;
 }
 
 .cm_event--start .cm_event {
-  margin-left:5px;
-  border-right:none;
+  margin-left: 5px;
+  border-right: none;
 }
+
 .cm_event--middle .cm_event {
-  padding: 5px 10px;
-  border-right:none;
-  border-left:none;
+  border-right: none;
+  border-left: none;
+  margin: 0 -1px;
 }
+
 .cm_event--end .cm_event {
-  margin-right:5px;
-  border-left:none;
+  margin-right: 5px;
+  border-left: none;
+  margin-left: -1px;
+}
+
+.cm_event--middle .cm_event__content, .cm_event--end .cm_event__content {
+  display: none;
+}
+
+.cm_day:last-of-type.cm_event--middle .cm_event {
+  margin-right: 0;
+}
+
+.cm_day:first-of-type.cm_event--middle .cm_event, .cm_day:first-of-type.cm_event--end .cm_event {
+  margin-left: 0;
+}
+
+.cm_day:first-of-type.cm_event--middle .cm_event__content, .cm_day:first-of-type.cm_event--end .cm_event__content {
+  display: block;
 }
 
 @media only screen and (max-width: 768px) {
@@ -116,9 +145,9 @@ ul {
   }
 
   .cm_event--start .cm_event, .cm_event--middle .cm_event, .cm_event--end .cm_event {
-    margin-left:5px;
-    margin-right:5px;
-    border:1px solid #333;
+    margin-left: 5px;
+    margin-right: 5px;
+    border: 1px solid #333333;
   }
 
   .cm_title {
@@ -142,7 +171,7 @@ ul {
 
   .cm li {
     height: auto !important;
-    border: 1px solid #ededed;
+    border: 1px solid #333333;
     width: 100%;
     padding: 10px;
     margin-bottom: -1px;
