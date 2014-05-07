@@ -2,6 +2,13 @@ $(document).ready(function() {
 	var calendarData = setupCalendarData(); // From separate file at the moment: calendar-data.js
 	//console.log(calendarData);
 	calendarMoment.init( $('#calendar'), moment(), calendarData);
+
+	$(window).resize( $.throttle( 250, function() {
+		//console.log('Resizing.');
+		calendarMoment.equalHeight();
+	} ) );
+
+
 });
 
 var calendarMoment = {
