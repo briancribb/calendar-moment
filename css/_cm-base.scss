@@ -2,10 +2,11 @@
 
 $baseFontSize:				14px;
 $colorDayBorder:			#333;
-$colorEventBorder:			#333;
-$colorEventBackground:		#cecece;
-$colorOutOfRange:			#F5F5F5;
+$colorEventBorder:			#666;
+$colorEventBackground:		#ddd;
+$colorOutOfRange:			#cecece;
 $colorButton:				#ddd;
+
 ul {
 	margin:0;
 	padding:0;
@@ -72,8 +73,8 @@ ul {
 	display: none;
 }
 .cm li.out_of_range {
-	background-color: #F5F5F5;
-	color: #666;
+	background-color: $colorOutOfRange;
+	color: darken($colorOutOfRange, 40%);
 }
 
 .cm_weekdays {
