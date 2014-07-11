@@ -1,0 +1,184 @@
+@charset "UTF-8";
+
+@baseFontSize:				14px;
+@colorDayBorder:			@color1Dark;
+@colorDayBackground:		@color1Lighter;
+@colorEventBorder:			@color1Dark;
+@colorEventBackground:		lighten( @color1Lighter, 5% );
+@colorOutOfRange:			@color1;
+@colorButton:				@color1Dark;
+
+ul {
+	margin:0;
+	padding:0;
+}
+.cm {
+	font-size: @baseFontSize;
+	clear:both;
+	max-width: 1200px;
+	display: block;
+	margin: 0 auto;
+}
+.cm_header {
+	display: block;
+	width:100%;
+	margin-bottom: 10px;
+}
+.cm_header:after, .cm:after, .cm_weekdays:after, .cm_days:after {
+	content:"";
+	display:table;
+	clear:both;
+}
+	.cm_title {
+		font-size:1.5em;
+		float:left;
+	}
+	.cm_nav {
+		//width:200px;
+		display:block;
+		float:right;
+		margin-right: 10px;
+	}
+	.cm_nav button {
+		padding-bottom:3px;
+	}
+
+.cm li {
+	list-style-type: none;
+	box-sizing: border-box;
+	width: 14.2%;
+	padding-bottom: 5px;
+	display: block;
+	float: left;
+	border: 1px solid @colorDayBorder;
+	margin-right: -1px;
+	margin-bottom: -1px;
+	overflow: visible!important;
+}
+.cm_days li {
+	min-height: 120px;
+}
+.cm_days li, .cm_weekdays li {
+	background: @colorDayBackground;
+}
+.cm .cm_day {
+	padding-bottom:15px;
+}
+.cm li .cm_day-name, .cm li .cm_month, .cm li .cm_date-span {
+	display: none;
+}
+.cm li.out_of_range {
+	background: @colorOutOfRange;
+	color: darken(@colorOutOfRange, 40%);
+}
+
+.cm_weekdays {
+	text-align: center;
+	li {
+		padding-top:5px;
+	}
+}
+
+.cm .cm_day_cell {
+	text-align: right;
+	margin-bottom: 5px;
+}
+
+.cm_date-title {
+	margin: 5px;
+}
+
+.cm .cm_event {
+	font-size: @baseFontSize*.8;
+	text-align: left;
+	background:@colorEventBackground;
+	border: 1px solid @colorEventBorder;
+}
+	.cm_event__content {
+		padding:5px;
+	}
+
+.cm .cm_event__title {
+	font-size: @baseFontSize*.9;
+}
+
+.cm_event--start .cm_event {
+  margin-left:5px;
+  border-right:none;
+}
+.cm_event--middle .cm_event {
+	border-right:none;
+	border-left:none;
+	margin: 0 -1px;
+}
+.cm_event--end .cm_event {
+  margin-right:5px;
+  border-left:none;
+  margin-left:-1px;
+}
+
+// Hide text on all but first event.
+.cm_event--middle .cm_event__content, .cm_event--end .cm_event__content {
+	display:none;
+}
+// Except where they're on the sides of the calendar.
+.cm_day:last-of-type.cm_event--middle .cm_event {
+	margin-right:0;
+}
+.cm_day:first-of-type.cm_event--middle .cm_event, .cm_day:first-of-type.cm_event--end .cm_event {
+	margin-left:0;
+}
+.cm_day:first-of-type.cm_event--middle .cm_event__content, .cm_day:first-of-type.cm_event--end .cm_event__content {
+	display:block;
+}
+
+
+@media only screen and (max-width : 768px) {
+	.cm li.out_of_range, .cm li.no_event {
+		display:none;
+	}
+	.cm li .cm_date-span {
+		display: block;
+	}
+	.cm_date {
+		display: none;
+	}
+
+	.cm_event--start .cm_event, .cm_event--middle .cm_event, .cm_event--end .cm_event {
+		margin-left:5px;
+		margin-right:5px;
+		border:1px solid @colorEventBorder;
+	}
+
+	.cm_title {
+		float:none;
+		text-align: center;
+		margin-bottom:10px;
+	}
+	.cm_nav {
+		float:none;
+		margin: 0 auto;
+		text-align: center;
+	}
+	.cm .cm_day-cell {
+		text-align: center;
+	}
+	.cm li{
+		height: auto!important;
+		border: 1px solid @colorDayBorder;
+		width: 100%;
+		padding: 10px;
+		margin-bottom: -1px;
+	}
+	.cm .cm_weekdays,
+	.cm li.cm_event--middle,
+	.cm li.cm_event--end,
+	.cm li.cm_out-of-range,
+	.cm li.cm_empty {
+		display: none;
+	}
+}
+
+
+
+
