@@ -6,6 +6,7 @@ $colorEventBorder:			#666;
 $colorEventBackground:		#ddd;
 $colorOutOfRange:			#cecece;
 $colorButton:				#ddd;
+$palmSize:					768px;
 
 ul {
 	margin:0;
@@ -134,7 +135,7 @@ ul {
 }
 
 
-@media only screen and (max-width : 768px) {
+@media only screen and (max-width : $palmSize) {
 	.cm li.out_of_range, .cm li.no_event {
 		display:none;
 	}

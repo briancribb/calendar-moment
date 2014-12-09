@@ -12,5 +12,32 @@
 		<script src="js/moment.2.6.0.min.js"></script>
 		<script src="js/cm-data.js"></script>
 		<script src="js/cm.js"></script>
+		<script>
+
+
+$(document).ready(function() {
+
+	var calendarData = setupCalendarData(); // From separate file at the moment: calendar-data.js
+	console.log(calendarData);
+
+	//calendarMoment.init( $('#calendar'), moment(), calendarData);
+	CM.init({
+		$targetCalendar	: $('#calendar'), 
+		targetMoment	: moment(), 
+		events			: calendarData
+	});
+
+	$(window).resize( $.debounce( 250, function() {
+		//console.log('Resizing.');
+		CM.equalHeight();
+	} ) );
+
+
+});
+
+
+
+
+		</script>
 	</body>
 </html>

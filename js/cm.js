@@ -1,24 +1,12 @@
-$(document).ready(function() {
-	var calendarData = setupCalendarData(); // From separate file at the moment: calendar-data.js
-	//console.log(calendarData);
-	calendarMoment.init( $('#calendar'), moment(), calendarData);
-
-	$(window).resize( $.debounce( 250, function() {
-		//console.log('Resizing.');
-		calendarMoment.equalHeight();
-	} ) );
-
-
-});
-
-var calendarMoment = {
-	init: function($targetCalendar, targetMoment, cmEvents) {
+var CM = {
+	init: function(settings) {
 		"use strict";
-		calendarMoment.events = cmEvents || null;
-		calendarMoment.$targetCalendar = $targetCalendar;
+		console.log(settings);
+		CM.events = settings.events;
+		CM.$targetCalendar = settings.$targetCalendar;
+		var targetMoment = settings.targetMoment;
 
-
-		$targetCalendar.on( "click", ".cm_nav button", function( event ) {
+		CM.$targetCalendar.on( "click", ".cm_nav button", function( event ) {
 			if ( $(this).hasClass('cm_prev') ) {
 				targetMoment.month( targetMoment.month() - 1 );
 			} else if ( $(this).hasClass('cm_next') ) {
@@ -26,14 +14,22 @@ var calendarMoment = {
 			} else if ( $(this).hasClass('cm_now') ) {
 				targetMoment = moment();
 			}
-			calendarMoment.build(targetMoment);
+			CM.build(targetMoment);
 		});
-		calendarMoment.build(targetMoment);
+		CM.build(targetMoment);
+
+
+		/*
+		$(window).resize( $.debounce( 250, function() {
+			//console.log('Resizing.');
+			CM.equalHeight(true);
+		} ) );
+		*/
 	},
 	build: function(targetMoment) {
 		"use strict";
 		var currentMoment	= targetMoment.clone(),
-			headerString	= '<header class="cm_header"><div class="cm_title">' + targetMoment.format("MMMM, YYYY") + '</div><nav id="cm_nav" class="cm_nav"><button class="cm_prev" disabled><< Prev</button><button class="cm_now" disabled>Now</button><button class="cm_next" disabled>Next >></button></nav></header>',
+			headerString	= '<header class="cm_header"><div class="cm_title">' + targetMoment.format("MMMM, YYYY") + '</div><nav id="cm_nav" class="cm_nav"><button class="cm_prev button" disabled><< Prev</button><button class="cm_now button" disabled>Now</button><button class="cm_next button" disabled>Next >></button></nav></header>',
 			weekdayString	= '<ul class="cm_weekdays"><li>Sunday</li><li>Monday</li><li>Tuesday</li><li>Wednesday</li><li>Thursday</li><li>Friday</li><li>Saturday</li></ul>',
 			weeksString		= '<section class="cm_weeks"><ul class="cm_days">',
 			closingString	= '</section>';
@@ -69,12 +65,18 @@ var calendarMoment = {
 			} else {
 				extraClasses += calendarEvent.eventClass;
 			}
+
+			var eventSpanString =	CM.events[ calendarEvent.eventIndex ].momentStart.format("Do") + 
+									' - ' + 
+									CM.events[ calendarEvent.eventIndex ].momentEnd.format("Do");
+
 			var dayString =	'<li class="cm_day' + extraClasses + '">' + 
 								'<div class="cm_day-cell">' + 
 									'<div class="cm_date-title">' + 
-										'<span class="cm_day">' + currentMoment.format("dddd") + ', </span>' + 
-										'<span class="cm_month">' + currentMoment.format("MMM") + '</span>' + 
+										//'<span class="cm_day-name">' + currentMoment.format("dddd") + ', </span>' + 
+										//'<span class="cm_month">' + currentMoment.format("MMM") + '</span>' + 
 										'<span class="cm_date"> ' + currentMoment.format("Do") + '</span>' + 
+										'<span class="cm_date-span"> ' + eventSpanString + '</span>' + 
 									'</div>' + 
 									calendarEvent.eventString + 
 								'</div>' + 
@@ -89,28 +91,30 @@ var calendarMoment = {
 			currentMoment.add('days', 1);
 		}
 		calendarString += ('</ul>' + closingString);
-		calendarMoment.$targetCalendar.addClass('cm').html( calendarString );
+		CM.$targetCalendar.addClass('cm').html( calendarString );
 
 
 		function buildEvent( currentMomentInt ) {
 			var eventString = '',
 				eventClass = '',
+				eventIndex = 0,
 				buildEventObject = function(index, classToAdd) {
+					eventIndex = index;
 					eventClass = classToAdd;
 					return	'<div class="cm_event">' + 
 								'<div class="cm_event__content">' + 
 									'<div class="cm_event__title">' + 
-										'<a class="cm_event__link" href="' + calendarMoment.events[index].url + '">' + calendarMoment.events[index].title + '</a>' + 
+										'<a class="cm_event__link" target="_blank" href="' + CM.events[index].url + '">' + CM.events[index].summary + '</a>' + 
 									'</div>' + 
-									'<div class="cm_event__location">' + calendarMoment.events[index].where + '</div>' + 
-									'<div class="cm_event__desc">' + eventClass + '</div>' + 
+									'<div class="cm_event__location">' + CM.events[index].location + '</div>' + 
+									'<div class="cm_event__desc"></div>' + 
 								'</div>' + 
 							'</div>';
 				}
 
-			for (var j = 0; j < calendarMoment.events.length; j++) {
-				var eventStartInt		= parseInt( moment(calendarMoment.events[j].startTime).format("YYYYMMDD") ),
-					eventEndInt			= parseInt( moment(calendarMoment.events[j].endTime).format("YYYYMMDD") );
+			for (var j = 0; j < CM.events.length; j++) {
+				var eventStartInt		= parseInt( moment(CM.events[j].startTime).format("YYYYMMDD") ),
+					eventEndInt			= parseInt( moment(CM.events[j].endTime).format("YYYYMMDD") );
 
 				if ( currentMomentInt === eventStartInt ) {
 					eventString = buildEventObject(j, ' cm_event--start');
@@ -120,59 +124,62 @@ var calendarMoment = {
 					eventString = buildEventObject(j, ' cm_event--middle');
 				}
 			}
-			return {eventString:eventString, eventClass:eventClass};
+			return {eventString:eventString, eventClass:eventClass, eventIndex:eventIndex};
 		}
 
 		function initBuild() {
 			// Check buttons to see if they should be enabled.
 			var rightNow = moment(),
-				$btnPrev = calendarMoment.$targetCalendar.find('#cm_nav .cm_prev'),
-				$btnNow = calendarMoment.$targetCalendar.find('#cm_nav .cm_now'),
-				$btnNext = calendarMoment.$targetCalendar.find('#cm_nav .cm_next');
+				$btnPrev = CM.$targetCalendar.find('#cm_nav .cm_prev'),
+				$btnNow = CM.$targetCalendar.find('#cm_nav .cm_now'),
+				$btnNext = CM.$targetCalendar.find('#cm_nav .cm_next');
 
 			if ( targetMoment.month() ===  rightNow.month() ) {
-				$btnPrev.prop('disabled', true);
-				$btnNow.prop('disabled', true);
-				$btnNext.prop('disabled', false);
+				$btnPrev.prop('disabled', true).addClass('alt');
+				$btnNow.prop('disabled', true).addClass('alt');
+				$btnNext.prop('disabled', false).removeClass('alt');
 			}
 			else if ( moment( targetMoment ).isBefore( rightNow ) ) {
-				$btnPrev.prop('disabled', true);
-				$btnNow.prop('disabled', false);
-				$btnNext.prop('disabled', false);
+				$btnPrev.prop('disabled', true).addClass('alt');
+				$btnNow.prop('disabled', false).removeClass('alt');
+				$btnNext.prop('disabled', false).removeClass('alt');
 			}
 			else if ( moment( targetMoment ).isAfter( rightNow ) ) {
-				$btnPrev.prop('disabled', false);
-				$btnNow.prop('disabled', false);
-				$btnNext.prop('disabled', false);
+				$btnPrev.prop('disabled', false).removeClass('alt');
+				$btnNow.prop('disabled', false).removeClass('alt');
+				$btnNext.prop('disabled', false).removeClass('alt');
 			}
-			calendarMoment.$dayCells = calendarMoment.$targetCalendar.find('.cm_day');
-			calendarMoment.$eventCells = calendarMoment.$targetCalendar.find('.cm_event');
-			calendarMoment.equalHeight();
+			CM.$dayCells = CM.$targetCalendar.find('.cm_day');
+			CM.$eventCells = CM.$targetCalendar.find('.cm_event');
+			CM.equalHeight(true);
 		}
 		return initBuild();
 	},
 	equalHeight: function(clearValue) {
 		//console.log('equalHeight()');
 		"use strict";
-		calendarMoment.$dayCells.removeAttr('style');
-		var tallestDay = 0, tallestEvent = 0;
+		var tallest = 0;
 
 		function checkHeight($target) {
 			var thisHeight = $target.height();
-			if(thisHeight > tallestDay) {
-				tallestDay = thisHeight;
+			if(thisHeight > tallest) {
+				tallest = thisHeight;
 			}
 		}
 		if (clearValue) {
-			calendarMoment.$dayCells.removeAttr('height');
-			calendarMoment.$eventCells.removeAttr('height');
+			CM.$dayCells.removeAttr('height');
+			CM.$eventCells.removeAttr('height');
 		}
-		calendarMoment.$eventCells.each(function() {
-			checkHeight( $(this) );
-		}).height(tallestDay);
 
-		calendarMoment.$dayCells.each(function() {
+		CM.$dayCells.each(function() {
 			checkHeight( $(this) );
-		}).height(tallestDay);
+		}).height(tallest);
+
+		tallest = 0; // reseting tallest so we can do the day cells.
+
+		CM.$eventCells.each(function() {
+			checkHeight( $(this) );
+		}).height(tallest);
+
 	}
 }
