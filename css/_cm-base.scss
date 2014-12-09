@@ -67,8 +67,11 @@ ul {
 	margin-bottom: -1px;
 	overflow: visible!important;
 }
-.cm_days li {
-  min-height: 120px;
+.cm_days {
+	position:relative;
+	li {
+		min-height: 120px;
+	}
 }
 .cm li .cm_day, .cm li .cm_month {
 	display: none;
@@ -114,9 +117,9 @@ ul {
 	margin: 0 -1px;
 }
 .cm_event--end .cm_event {
-  margin-right:5px;
-  border-left:none;
-  margin-left:-1px;
+	margin-right:5px;
+	border-left:none;
+	margin-left:-1px;
 }
 
 // Hide text on all but first event.
