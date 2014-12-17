@@ -30,11 +30,12 @@ var CM = {
 		"use strict";
 		var currentMoment	= targetMoment.clone(),
 			headerString	= '<header class="cm_header"><div class="cm_title">' + targetMoment.format("MMMM, YYYY") + '</div><nav id="cm_nav" class="cm_nav"><button class="cm_prev button" disabled><< Prev</button><button class="cm_now button" disabled>Now</button><button class="cm_next button" disabled>Next >></button></nav></header>',
+			openingString	= '<section class="cm_body">',
 			weekdayString	= '<ul class="cm_weekdays"><li>Sunday</li><li>Monday</li><li>Tuesday</li><li>Wednesday</li><li>Thursday</li><li>Friday</li><li>Saturday</li></ul>',
-			weeksString		= '<section class="cm_weeks"><ul class="cm_days">',
-			closingString	= '</section>';
+			weeksString		= '<ul class="cm_week">', // ul tag is closed after days are built.
+			closingString	= '</section>'; // Closes cm_body and cm_body.
 
-		var calendarString	= headerString + weekdayString + weeksString,
+		var calendarString	= headerString + openingString + weekdayString + weeksString,
 			dayString		= '',
 			thisMonth		= currentMoment.month(),
 			daysInThisMonth	= currentMoment.daysInMonth(),
@@ -83,7 +84,7 @@ var CM = {
 							'</li>';
 
 			if ( (i +1) % 7 === 0 && dayCounter < daysInThisMonth) {
-				dayString += '</ul><ul class="cm_days">';
+				dayString += '</ul><ul class="cm_week">';
 			}
 			dayCounter ++;
 			calendarString += dayString;

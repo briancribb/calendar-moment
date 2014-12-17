@@ -22,7 +22,7 @@ ul {
 }
 
 /* line 28, _cm-base.scss */
-.cm_header:after, .cm:after, .cm_weekdays:after, .cm_days:after {
+.cm_header:after, .cm:after, .cm_weekdays:after, .cm_week:after {
   content: "";
   display: table;
   clear: both;
@@ -62,57 +62,97 @@ ul {
   border-radius: 0  7px 7px 0;
 }
 
-/* line 58, _cm-base.scss */
+/* line 57, _cm-base.scss */
+.cm_body {
+  width: 100%;
+  background: #ddd;
+  display: table;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* line 69, _cm-base.scss */
+ul.cm_weekdays {
+  display: table-row;
+}
+/* line 71, _cm-base.scss */
+ul.cm_weekdays > li {
+  height: auto;
+}
+
+/* line 75, _cm-base.scss */
+.cm_week {
+  display: table-row;
+  /*
+  position:relative;
+  display:table-row;
+  li {
+  	min-height: 120px;
+  	display:table-cell;
+  }
+  */
+}
+/* line 86, _cm-base.scss */
+.cm_week:last-child > li {
+  border-bottom: 1px solid #333333;
+}
+
+/* line 90, _cm-base.scss */
 .cm li {
+  list-style-type: none;
+  display: table-cell;
+  width: auto;
+  height: 100px;
+  border-right: 1px solid #333333;
+  border-top: 1px solid #333333;
+  box-sizing: border-box;
+  /*
   list-style-type: none;
   box-sizing: border-box;
   width: 14.2%;
   padding-bottom: 5px;
   display: block;
   float: left;
-  border: 1px solid #333333;
+  border: 1px solid $colorDayBorder;
   margin-right: -1px;
   margin-bottom: -1px;
   overflow: visible!important;
+  */
+}
+/* line 99, _cm-base.scss */
+.cm li:first-child {
+  border-left: 1px solid #333333;
 }
 
-/* line 70, _cm-base.scss */
-.cm_days {
-  position: relative;
-}
-/* line 72, _cm-base.scss */
-.cm_days li {
-  min-height: 120px;
-}
-
-/* line 76, _cm-base.scss */
+/* line 115, _cm-base.scss */
 .cm li .cm_day, .cm li .cm_month {
   display: none;
 }
 
-/* line 79, _cm-base.scss */
+/* line 118, _cm-base.scss */
 .cm li.out_of_range {
   background-color: #cecece;
   color: #686868;
 }
 
-/* line 84, _cm-base.scss */
+/* line 123, _cm-base.scss */
 .cm_weekdays {
   text-align: center;
 }
 
-/* line 87, _cm-base.scss */
+/* line 127, _cm-base.scss */
 .cm .cm_day_cell {
   text-align: right;
   margin-bottom: 5px;
 }
 
-/* line 92, _cm-base.scss */
+/* line 132, _cm-base.scss */
 .cm_date-title {
   margin: 5px;
 }
 
-/* line 96, _cm-base.scss */
+/* line 136, _cm-base.scss */
 .cm .cm_event {
   font-size: 11.2px;
   text-align: left;
@@ -120,93 +160,93 @@ ul {
   border: 1px solid #666666;
 }
 
-/* line 102, _cm-base.scss */
+/* line 142, _cm-base.scss */
 .cm_event__content {
   padding: 5px;
 }
 
-/* line 106, _cm-base.scss */
+/* line 146, _cm-base.scss */
 .cm .cm_event__title {
   font-size: 12.6px;
 }
 
-/* line 110, _cm-base.scss */
+/* line 150, _cm-base.scss */
 .cm_event--start .cm_event {
   margin-left: 5px;
   border-right: none;
 }
 
-/* line 114, _cm-base.scss */
+/* line 154, _cm-base.scss */
 .cm_event--middle .cm_event {
   border-right: none;
   border-left: none;
   margin: 0 -1px;
 }
 
-/* line 119, _cm-base.scss */
+/* line 159, _cm-base.scss */
 .cm_event--end .cm_event {
   margin-right: 5px;
   border-left: none;
   margin-left: -1px;
 }
 
-/* line 126, _cm-base.scss */
+/* line 166, _cm-base.scss */
 .cm_event--middle .cm_event__content, .cm_event--end .cm_event__content {
   display: none;
 }
 
-/* line 130, _cm-base.scss */
+/* line 170, _cm-base.scss */
 .cm_day:last-of-type.cm_event--middle .cm_event {
   margin-right: 0;
 }
 
-/* line 133, _cm-base.scss */
+/* line 173, _cm-base.scss */
 .cm_day:first-of-type.cm_event--middle .cm_event, .cm_day:first-of-type.cm_event--end .cm_event {
   margin-left: 0;
 }
 
-/* line 136, _cm-base.scss */
+/* line 176, _cm-base.scss */
 .cm_day:first-of-type.cm_event--middle .cm_event__content, .cm_day:first-of-type.cm_event--end .cm_event__content {
   display: block;
 }
 
 @media only screen and (max-width: 768px) {
-  /* line 142, _cm-base.scss */
+  /* line 182, _cm-base.scss */
   .cm li.out_of_range, .cm li.no_event {
     display: none;
   }
 
-  /* line 146, _cm-base.scss */
+  /* line 186, _cm-base.scss */
   .cm_event--start .cm_event, .cm_event--middle .cm_event, .cm_event--end .cm_event {
     margin-left: 5px;
     margin-right: 5px;
     border: 1px solid #666666;
   }
 
-  /* line 152, _cm-base.scss */
+  /* line 192, _cm-base.scss */
   .cm_title {
     float: none;
     text-align: center;
     margin-bottom: 10px;
   }
 
-  /* line 157, _cm-base.scss */
+  /* line 197, _cm-base.scss */
   .cm_nav {
     float: none;
     margin: 0 auto;
   }
 
-  /* line 161, _cm-base.scss */
+  /* line 201, _cm-base.scss */
   .cm .cm_weekdays {
     display: none;
   }
 
-  /* line 164, _cm-base.scss */
+  /* line 204, _cm-base.scss */
   .cm .cm_day-cell {
     text-align: center;
   }
 
-  /* line 167, _cm-base.scss */
+  /* line 207, _cm-base.scss */
   .cm li {
     height: auto!important;
     border: 1px solid #333333;
@@ -215,12 +255,12 @@ ul {
     margin-bottom: -1px;
   }
 
-  /* line 174, _cm-base.scss */
+  /* line 214, _cm-base.scss */
   .cm li .cm_day, .cm li .cm_month {
     display: inline;
   }
 
-  /* line 178, _cm-base.scss */
+  /* line 218, _cm-base.scss */
   .cm li.cm_out-of-range, .cm li.cm_empty {
     display: none;
   }

@@ -7,7 +7,7 @@ $colorEventBackground:		#ddd;
 $colorOutOfRange:			#cecece;
 $colorButton:				#ddd;
 $palmSize:					768px;
-
+$border-radius:				0;
 ul {
 	margin:0;
 	padding:0;
@@ -25,7 +25,7 @@ ul {
 	width:100%;
 	margin-bottom: 10px;
 }
-.cm_header:after, .cm:after, .cm_weekdays:after, .cm_days:after {
+.cm_header:after, .cm:after, .cm_weekdays:after, .cm_week:after {
 	content:"";
 	display:table;
 	clear:both;
@@ -54,8 +54,52 @@ ul {
 	.cm_nav button.next {
 		border-radius: 0  7px 7px 0;
 	}
-
+.cm_body {
+	//display: table;
+	//height: 100px;
+	width:100%;
+	background:#ddd;
+	display:table;
+	width:100%;
+	margin:0;
+	padding:0;
+	//border-left: 1px solid $colorDayBorder;
+	//border-bottom: none;
+}
+ul.cm_weekdays {
+	display:table-row;
+	& > li {
+		height:auto;
+	}
+}
+.cm_week {
+	display:table-row;
+	//border-right: 1px solid $colorDayBorder;
+	/*
+	position:relative;
+	display:table-row;
+	li {
+		min-height: 120px;
+		display:table-cell;
+	}
+	*/
+	&:last-child > li {
+		border-bottom: 1px solid $colorDayBorder;
+	}
+}
 .cm li {
+
+	list-style-type:none;
+	display: table-cell;
+	width:auto;
+	height:100px;
+	border-right: 1px solid $colorDayBorder;
+	border-top: 1px solid $colorDayBorder;
+	box-sizing: border-box;
+	&:first-child {
+		border-left: 1px solid $colorDayBorder;
+	}
+	/*
 	list-style-type: none;
 	box-sizing: border-box;
 	width: 14.2%;
@@ -66,12 +110,7 @@ ul {
 	margin-right: -1px;
 	margin-bottom: -1px;
 	overflow: visible!important;
-}
-.cm_days {
-	position:relative;
-	li {
-		min-height: 120px;
-	}
+	*/
 }
 .cm li .cm_day, .cm li .cm_month {
 	display: none;
@@ -84,6 +123,7 @@ ul {
 .cm_weekdays {
 	text-align: center;
 }
+
 .cm .cm_day_cell {
 	text-align: right;
 	margin-bottom: 5px;
