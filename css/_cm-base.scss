@@ -58,7 +58,6 @@ ul {
 	//display: table;
 	//height: 100px;
 	width:100%;
-	background:#ddd;
 	display:table;
 	width:100%;
 	margin:0;
@@ -92,6 +91,7 @@ ul.cm_weekdays {
 	list-style-type:none;
 	display: table-cell;
 	width:auto;
+	//width: 14.2%;
 	height:100px;
 	border-right: 1px solid $colorDayBorder;
 	border-top: 1px solid $colorDayBorder;
@@ -138,6 +138,8 @@ ul.cm_weekdays {
 	text-align: left;
 	background:$colorEventBackground;
 	border: 1px solid $colorEventBorder;
+	max-height: 60px;
+	overflow: hidden;
 }
 	.cm_event__content {
 		padding:5px;
@@ -198,24 +200,28 @@ ul.cm_weekdays {
 		float:none;
 		margin: 0 auto;
 	}
-	.cm .cm_weekdays{
+	.cm .cm_weekdays {
 		display: none;
 	}
 	.cm .cm_day-cell {
 		text-align: center;
 	}
 	.cm li{
+		display:block;
 		height: auto!important;
 		border: 1px solid $colorDayBorder;
 		width: 100%;
 		padding: 10px;
 		margin-bottom: -1px;
 	}
+	.cm_day-cell {
+		height:auto;
+	}
 	.cm li .cm_day, .cm li .cm_month{
 		display: inline;
 	}
 
-	.cm li.cm_out-of-range, .cm li.cm_empty {
+	.cm li.cm_out-of-range, .cm li.cm_empty, .cm li.cm_event--end {
 		display: none;
 	}
 }

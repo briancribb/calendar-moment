@@ -112,7 +112,7 @@ var CM = {
 								'</div>' + 
 							'</div>';
 				}
-
+			/*
 			for (var j = 0; j < CM.events.length; j++) {
 				var eventStartInt		= parseInt( moment(CM.events[j].startTime).format("YYYYMMDD") ),
 					eventEndInt			= parseInt( moment(CM.events[j].endTime).format("YYYYMMDD") );
@@ -125,6 +125,7 @@ var CM = {
 					eventString = buildEventObject(j, ' cm_event--middle');
 				}
 			}
+			*/
 			return {eventString:eventString, eventClass:eventClass, eventIndex:eventIndex};
 		}
 
@@ -152,7 +153,7 @@ var CM = {
 			}
 			CM.$dayCells = CM.$targetCalendar.find('.cm_day');
 			CM.$eventCells = CM.$targetCalendar.find('.cm_event');
-			CM.equalHeight(true);
+			//CM.equalHeight(true);
 		}
 		return initBuild();
 	},
@@ -174,13 +175,12 @@ var CM = {
 
 		CM.$dayCells.each(function() {
 			checkHeight( $(this) );
-		}).height(tallest);
+		}).css('min-height',tallest);
 
 		tallest = 0; // reseting tallest so we can do the day cells.
 
 		CM.$eventCells.each(function() {
 			checkHeight( $(this) );
-		}).height(tallest);
-
+		}).css('min-height',tallest);
 	}
 }
