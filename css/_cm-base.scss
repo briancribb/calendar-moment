@@ -27,7 +27,7 @@ ul {
 }
 .cm_header:after, .cm:after, .cm_weekdays:after, .cm_week:after {
 	content:"";
-	display:table;
+	display:block;
 	clear:both;
 }
 	.cm_title {
@@ -59,6 +59,7 @@ ul {
 	//height: 100px;
 	width:100%;
 	display:table;
+	table-layout:fixed;
 	width:100%;
 	margin:0;
 	padding:0;
@@ -90,7 +91,7 @@ ul.cm_weekdays {
 
 	list-style-type:none;
 	display: table-cell;
-	width:auto;
+	width:100%;
 	//width: 14.2%;
 	height:100px;
 	border-right: 1px solid $colorDayBorder;
@@ -132,7 +133,9 @@ ul.cm_weekdays {
 .cm_date-title {
 	margin: 5px;
 }
-
+.cm_date-span {
+	display:none;
+}
 .cm .cm_event {
 	font-size: $baseFontSize*.8;
 	text-align: left;
@@ -220,7 +223,9 @@ ul.cm_weekdays {
 	.cm li .cm_day, .cm li .cm_month{
 		display: inline;
 	}
-
+	.cm_date-span {
+		display:block;
+	}
 	.cm li.cm_out-of-range, .cm li.cm_empty, .cm li.cm_event--end {
 		display: none;
 	}

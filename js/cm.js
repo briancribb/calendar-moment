@@ -1,10 +1,13 @@
 var CM = {
 	init: function(settings) {
 		"use strict";
-		console.log(settings);
 		CM.events = settings.events;
 		CM.$targetCalendar = settings.$targetCalendar;
 		var targetMoment = settings.targetMoment;
+		console.log('CM.events:');
+		console.log(CM.events);
+		console.log(' ');
+
 
 		CM.$targetCalendar.on( "click", ".cm_nav button", function( event ) {
 			if ( $(this).hasClass('cm_prev') ) {
@@ -76,8 +79,8 @@ var CM = {
 									'<div class="cm_date-title">' + 
 										//'<span class="cm_day-name">' + currentMoment.format("dddd") + ', </span>' + 
 										//'<span class="cm_month">' + currentMoment.format("MMM") + '</span>' + 
-										'<span class="cm_date"> ' + currentMoment.format("Do") + '</span>' + 
-										'<span class="cm_date-span"> ' + eventSpanString + '</span>' + 
+										'<span class="cm_date">' + currentMoment.format("Do") + '</span>' + 
+										//'<span class="cm_date-span">' + eventSpanString + '</span>' + 
 									'</div>' + 
 									calendarEvent.eventString + 
 								'</div>' + 
