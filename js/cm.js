@@ -56,6 +56,7 @@ var CM = {
 
 		for (var i = 0; i < totalDays; i++) {
 			var extraClasses = '',
+				dataAttr = '',
 				calendarEvent = buildEvent( parseInt( currentMoment.format("YYYYMMDD") ) );
 			//console.log(calendarEvent);
 
@@ -68,13 +69,13 @@ var CM = {
 				extraClasses += ' no_event';
 			} else {
 				extraClasses += calendarEvent.eventClass;
+				dataAttr += ' data-event-index="' + calendarEvent.eventIndex + '"'
 			}
-
 			var eventSpanString =	CM.events[ calendarEvent.eventIndex ].momentStart.format("Do") + 
 									' - ' + 
 									CM.events[ calendarEvent.eventIndex ].momentEnd.format("Do");
 
-			var dayString =	'<li class="cm_day' + extraClasses + '">' + 
+			var dayString =	'<li class="cm_day' + extraClasses + '"' + dataAttr + '>' + 
 								'<div class="cm_day-cell">' + 
 									'<div class="cm_date-title">' + 
 										//'<span class="cm_day-name">' + currentMoment.format("dddd") + ', </span>' + 
@@ -95,16 +96,18 @@ var CM = {
 			currentMoment.add('days', 1);
 		}
 		calendarString += ('</ul>' + closingString);
-		CM.$targetCalendar.addClass('cm').html( calendarString );
+		CM.$targetCalendar.addClass('cm').html( calendarString ).find('.cm_body').addClass('justAddedThis');
 
 
 		function buildEvent( currentMomentInt ) {
 			var eventString = '',
 				eventClass = '',
 				eventIndex = 0,
-				buildEventObject = function(index, classToAdd) {
+				buildEventMarkup = function(index, classToAdd) {
 					eventIndex = index;
 					eventClass = classToAdd;
+					return '<!-- Event Markup -->';
+					/*
 					return	'<div class="cm_event">' + 
 								'<div class="cm_event__content">' + 
 									'<div class="cm_event__title">' + 
@@ -114,21 +117,22 @@ var CM = {
 									'<div class="cm_event__desc"></div>' + 
 								'</div>' + 
 							'</div>';
+					*/
 				}
-			/*
+
 			for (var j = 0; j < CM.events.length; j++) {
 				var eventStartInt		= parseInt( moment(CM.events[j].startTime).format("YYYYMMDD") ),
 					eventEndInt			= parseInt( moment(CM.events[j].endTime).format("YYYYMMDD") );
 
 				if ( currentMomentInt === eventStartInt ) {
-					eventString = buildEventObject(j, ' cm_event--start');
+					eventString = buildEventMarkup(j, ' cm_event--start');
 				} else if ( currentMomentInt === eventEndInt ) {
-					eventString = buildEventObject(j, ' cm_event--end');
+					eventString = buildEventMarkup(j, ' cm_event--end');
 				} else if ( currentMomentInt > eventStartInt && currentMomentInt < eventEndInt ) {
-					eventString = buildEventObject(j, ' cm_event--middle');
+					eventString = buildEventMarkup(j, ' cm_event--middle');
 				}
 			}
-			*/
+
 			return {eventString:eventString, eventClass:eventClass, eventIndex:eventIndex};
 		}
 

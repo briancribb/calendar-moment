@@ -279,12 +279,8 @@ var setupCalendarData = function() {
 		});
 
 		/*
-		if( Quill.base.props.$eventWidget[0] ) {
-			Quill.base.calendarWidget( Quill.base.props.$eventWidget );
-		}
-		if( Quill.base.props.$calendar[0] ) {
-			calendarMoment.init( Quill.base.props.$calendar, moment(), Quill.base.events);
-		}
+		 * In a real AJAX call, Calendar Moment would be called at this point. For now, we're just returning the data.
+		 * calendarMoment.init( $targetCalendar, moment(), cmEvents);
 		*/
 	//} , failure);
 
