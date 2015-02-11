@@ -6,9 +6,10 @@
 <h3>Dependencies</h3>
 <p>Calendar Moment requires the following files to work. These are currently being pulled from CDN's, but for Production use they would be concatenated and minified.</p>
 <ul>
-	<li>jQuery: From the Google CDN, Using 2.1.3 becaus IE8 can go to hell. However, if you're still chained to 1995 then this should still work with 1.x.</li>
+	<li>jQuery: From the Google CDN, Using 2.1.3 becaus IE8 can go to hell. However, if you're still chained to 1995 then this should still work with 1.x. I'm not going to test it for that, but it will probably work.</li>
 	<li>jQuery Throttle/Debounce Plugin: This is Ben Alman's script, being pulled from CDNJS.</li>
 	<li>MomentJS 2.9.0, also pulled from CDNJS.</li>
 </ul>
 <h3>Data Sources</h3>
-<p>This calendar is pulling from the Google Calendar API, but it reworks Google's cumbersome JSON response into a smaller form that's easier to read. Since our final data structure is simple and custom-made for Calendar Moment, you could really supply data from anywhere. Either serve up JSON just for CM, or write a script to transform your data source as I've done with Google Calendar.</p>
+<p>Data can come from anywhere, but will need to be converted into the format that Calendar Moment needs. I prefer to use the Google Calendar API, so I wrote a separate function to convert Google's cumbersome JSON response into a smaller form that's easier to read. You'll need some similar script if you want to use a different data source. Convert the response first, and then pass the resulting event array into Calendar Moment's <code>init</code> function.</p>
+<p><em>Note: Just to make things easier to tweak, I've copied a JSON response from my Google Calendar and added it to my data transformation function. This way I can change dates and things without logging into my Google account. In a Production environment, I would pull the data first, transform it and then run Calendar Moment after the AJAX call succeeds.</em></p>
