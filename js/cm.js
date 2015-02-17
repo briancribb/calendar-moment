@@ -43,9 +43,7 @@ var CM = {
 			thisMonth		= currentMoment.month(),
 			daysInThisMonth	= currentMoment.daysInMonth(),
 			lastWeekdayNum	= currentMoment.date( currentMoment.daysInMonth() ).weekday(),	//Careful. Sets the current month to it's last day.
-			firstWeekdayNum	= currentMoment.date(1).weekday(),								// Careful. Sets the current month to first day. Important to do this second!
-			beforeMonth		= false,
-			afterMonth		= false;
+			firstWeekdayNum	= currentMoment.date(1).weekday();								// Careful. Sets the current month to first day. Important to do this second!
 
 		var dayCounter		= 1 - firstWeekdayNum, // Starting current Day as the first day on the calendar.
 			lastDay			= (6 - lastWeekdayNum) + daysInThisMonth, // calendar starts at 1, not zero.
@@ -56,26 +54,21 @@ var CM = {
 
 		for (var i = 0; i < totalDays; i++) {
 			var extraClasses = '',
-				dataAttr = '',
 				calendarEvent = buildEvent( parseInt( currentMoment.format("YYYYMMDD") ) );
 			//console.log(calendarEvent);
-
-			beforeMonth = (dayCounter < 1) ? true : false;
-			afterMonth = (dayCounter > daysInThisMonth) ? true : false;
-			if (beforeMonth || afterMonth) {
+			if ( dayCounter < 1 || dayCounter > daysInThisMonth ) {
 				extraClasses += ' out_of_range';
 			}
 			if (calendarEvent.eventString === '') {
 				extraClasses += ' no_event';
 			} else {
 				extraClasses += calendarEvent.eventClass;
-				dataAttr += ' data-event-index="' + calendarEvent.eventIndex + '"'
 			}
 			var eventSpanString =	CM.events[ calendarEvent.eventIndex ].momentStart.format("Do") + 
 									' - ' + 
 									CM.events[ calendarEvent.eventIndex ].momentEnd.format("Do");
 
-			var dayString =	'<li class="cm_day' + extraClasses + '"' + dataAttr + '>' + 
+			var dayString =	'<li class="cm_day' + extraClasses + '">' + 
 								'<div class="cm_day-cell">' + 
 									'<div class="cm_date-title">' + 
 										//'<span class="cm_day-name">' + currentMoment.format("dddd") + ', </span>' + 
@@ -103,12 +96,14 @@ var CM = {
 			var eventString = '',
 				eventClass = '',
 				eventIndex = 0,
+				dataAttr = '',
 				buildEventMarkup = function(index, classToAdd) {
 					eventIndex = index;
 					eventClass = classToAdd;
-					return '<!-- Event Markup -->';
-					/*
-					return	'<div class="cm_event">' + 
+					dataAttr += ' data-event-index="' + index + '"'
+					//return '<!-- Event Markup -->';
+
+					return	'<div class="cm_event"' + dataAttr + '>' + 
 								'<div class="cm_event__content">' + 
 									'<div class="cm_event__title">' + 
 										'<a class="cm_event__link" target="_blank" href="' + CM.events[index].url + '">' + CM.events[index].summary + '</a>' + 
@@ -117,8 +112,8 @@ var CM = {
 									'<div class="cm_event__desc"></div>' + 
 								'</div>' + 
 							'</div>';
-					*/
-				}
+
+				};
 
 			for (var j = 0; j < CM.events.length; j++) {
 				var eventStartInt		= parseInt( moment(CM.events[j].startTime).format("YYYYMMDD") ),

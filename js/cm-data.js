@@ -1,23 +1,23 @@
 /*  Notes for constructing the url where this data came from.
-  // Getting an appropriate date.
-  function myFunction() {
-	  var d = new Date();
-	  var n = d.toISOString();
-	  document.getElementById("demo").innerHTML = n;
-  }
+	// Getting an appropriate date.
+	function myFunction() {
+		var d = new Date();
+		var n = d.toISOString();
+		document.getElementById("demo").innerHTML = n;
+	}
 
-  // https://console.developers.google.com/project
+	// https://console.developers.google.com/project
 
-  // Calendar ID for my test calendar
-  // 08n518qub05rj72r44h2et57i4@group.calendar.google.com
+	// Calendar ID for my test calendar
+	// 08n518qub05rj72r44h2et57i4@group.calendar.google.com
 
-  // API Key:
-  // AIzaSyDTG_U9jFru1SxYkcLkHFdBMKSDPBf5ENU
+	// API Key:
+	// AIzaSyDTG_U9jFru1SxYkcLkHFdBMKSDPBf5ENU
 
-  // url format.
-  https://www.googleapis.com/calendar/v3/calendars/{calendarid}/events?key={Your Public API Key}
+	// url format.
+	https://www.googleapis.com/calendar/v3/calendars/{calendarid}/events?key={Your Public API Key}
 
-  // Working url string.
+	// Working url string.
 https://www.googleapis.com/calendar/v3/calendars/08n518qub05rj72r44h2et57i4@group.calendar.google.com/events?key=AIzaSyDTG_U9jFru1SxYkcLkHFdBMKSDPBf5ENU&orderby=startTime&singleEvents=true&timeMin=2015-02-09T16:55:55.290Z
 
 */
@@ -27,197 +27,197 @@ var setupCalendarData = function() {
 
 	var fakeData =
 		{
-		 "kind": "calendar#events",
-		 "etag": "\"1418078761809000\"",
-		 "summary": "Webdev Test",
-		 "description": "Just for testing.",
-		 "updated": "2015-02-08T22:46:01.809Z",
-		 "timeZone": "America/New_York",
-		 "accessRole": "reader",
-		 "defaultReminders": [],
-		 "nextSyncToken": "COjo8YbDt8ICEAAYAQ==",
-		 "items": [
+			"kind": "calendar#events",
+			"etag": "\"1418078761809000\"",
+			"summary": "Webdev Test",
+			"description": "Just for testing.",
+			"updated": "2015-02-08T22:46:01.809Z",
+			"timeZone": "America/New_York",
+			"accessRole": "reader",
+			"defaultReminders": [],
+			"nextSyncToken": "COjo8YbDt8ICEAAYAQ==",
+			"items": [
 			{
-		   "kind": "calendar#event",
-		   "etag": "\"2835594223344000\"",
-		   "id": "n578q7v8ktg6mok5i3hs762ofk",
-		   "status": "confirmed",
-		   "htmlLink": "https://www.google.com/calendar/event?eid=bjU3OHE3djhrdGc2bW9rNWkzaHM3NjJvZmsgMDhuNTE4cXViMDVyajcycjQ0aDJldDU3aTRAZw",
-		   "created": "2015-02-05T16:31:23.000Z",
-		   "updated": "2015-02-05T16:31:51.672Z",
-		   "summary": "More Stuff",
-		   "description": "Somewhere you can get many, many tacos.",
-		   "location": "Portland, ME, USA",
-		   "creator": {
-			"email": "brian.cribb@gmail.com",
-			"displayName": "Brian Cribb"
-		   },
-		   "organizer": {
-			"email": "08n518qub05rj72r44h2et57i4@group.calendar.google.com",
-			"displayName": "Webdev Test",
-			"self": true
-		   },
-		   "start": {
-			"date": "2015-02-26"
-		   },
-		   "end": {
-			"date": "2015-02-27"
-		   },
-		   "transparency": "transparent",
-		   "iCalUID": "n578q7v8ktg6mok5i3hs762ofk@google.com",
-		   "sequence": 0
-		  },
-		  {
-		   "kind": "calendar#event",
-		   "etag": "\"2835594313790000\"",
-		   "id": "qq1mhh3dqmtkhbf5armb74r6ls",
-		   "status": "confirmed",
-		   "htmlLink": "https://www.google.com/calendar/event?eid=cXExbWhoM2RxbXRraGJmNWFybWI3NHI2bHMgMDhuNTE4cXViMDVyajcycjQ0aDJldDU3aTRAZw",
-		   "created": "2015-02-05T16:32:36.000Z",
-		   "updated": "2015-02-05T16:32:36.895Z",
-		   "summary": "Weird Night of Things",
-		   "description": "Never know what will happen at one of these.",
-		   "location": "That guy's house",
-		   "creator": {
-			"email": "brian.cribb@gmail.com",
-			"displayName": "Brian Cribb"
-		   },
-		   "organizer": {
-			"email": "08n518qub05rj72r44h2et57i4@group.calendar.google.com",
-			"displayName": "Webdev Test",
-			"self": true
-		   },
-		   "start": {
-			"date": "2015-02-31"
-		   },
-		   "end": {
-			"date": "2015-02-01"
-		   },
-		   "transparency": "transparent",
-		   "iCalUID": "qq1mhh3dqmtkhbf5armb74r6ls@google.com",
-		   "sequence": 0
-		  },
-		  {
-		   "kind": "calendar#event",
-		   "etag": "\"2835594361586000\"",
-		   "id": "gqb8sldpq9v04je2ra1pru7qnc",
-		   "status": "confirmed",
-		   "htmlLink": "https://www.google.com/calendar/event?eid=Z3FiOHNsZHBxOXYwNGplMnJhMXBydTdxbmMgMDhuNTE4cXViMDVyajcycjQ0aDJldDU3aTRAZw",
-		   "created": "2015-02-05T16:33:00.000Z",
-		   "updated": "2015-02-05T16:33:00.793Z",
-		   "summary": "Random Event",
-		   "description": "Random details",
-		   "location": "Random Place",
-		   "creator": {
-			"email": "brian.cribb@gmail.com",
-			"displayName": "Brian Cribb"
-		   },
-		   "organizer": {
-			"email": "08n518qub05rj72r44h2et57i4@group.calendar.google.com",
-			"displayName": "Webdev Test",
-			"self": true
-		   },
-		   "start": {
-			"date": "2015-02-06"
-		   },
-		   "end": {
-			"date": "2015-02-07"
-		   },
-		   "transparency": "transparent",
-		   "iCalUID": "gqb8sldpq9v04je2ra1pru7qnc@google.com",
-		   "sequence": 0
-		  },
-		  {
-		   "kind": "calendar#event",
-		   "etag": "\"2835594407460000\"",
-		   "id": "f9u2vhjrm37c7ks69cr6v6230o",
-		   "status": "confirmed",
-		   "htmlLink": "https://www.google.com/calendar/event?eid=Zjl1MnZoanJtMzdjN2tzNjljcjZ2NjIzMG8gMDhuNTE4cXViMDVyajcycjQ0aDJldDU3aTRAZw",
-		   "created": "2015-02-05T16:33:23.000Z",
-		   "updated": "2015-02-05T16:33:23.730Z",
-		   "summary": "Testing Things",
-		   "description": "For SCIENCE.",
-		   "location": "My laboratory",
-		   "creator": {
-			"email": "brian.cribb@gmail.com",
-			"displayName": "Brian Cribb"
-		   },
-		   "organizer": {
-			"email": "08n518qub05rj72r44h2et57i4@group.calendar.google.com",
-			"displayName": "Webdev Test",
-			"self": true
-		   },
-		   "start": {
-			"date": "2015-02-15"
-		   },
-		   "end": {
-			"date": "2015-02-16"
-		   },
-		   "transparency": "transparent",
-		   "iCalUID": "f9u2vhjrm37c7ks69cr6v6230o@google.com",
-		   "sequence": 0
-		  },
-		  {
-		   "kind": "calendar#event",
-		   "etag": "\"2835594484154000\"",
-		   "id": "vn3ig80srl193mnh5l9kbbr25g",
-		   "status": "confirmed",
-		   "htmlLink": "https://www.google.com/calendar/event?eid=dm4zaWc4MHNybDE5M21uaDVsOWtiYnIyNWcgMDhuNTE4cXViMDVyajcycjQ0aDJldDU3aTRAZw",
-		   "created": "2015-02-05T16:34:02.000Z",
-		   "updated": "2015-02-05T16:34:02.077Z",
-		   "summary": "One More Time",
-		   "description": "Another test event with random stuff in it.",
-		   "location": "Washington, DC, USA",
-		   "creator": {
-			"email": "brian.cribb@gmail.com",
-			"displayName": "Brian Cribb"
-		   },
-		   "organizer": {
-			"email": "08n518qub05rj72r44h2et57i4@group.calendar.google.com",
-			"displayName": "Webdev Test",
-			"self": true
-		   },
-		   "start": {
-			"date": "2015-02-18"
-		   },
-		   "end": {
-			"date": "2015-02-19"
-		   },
-		   "transparency": "transparent",
-		   "iCalUID": "vn3ig80srl193mnh5l9kbbr25g@google.com",
-		   "sequence": 0
-		  },
-		  {
-		   "kind": "calendar#event",
-		   "etag": "\"2836156762914000\"",
-		   "id": "9fqbub1jsmo6oggq9pague4ts0",
-		   "status": "confirmed",
-		   "htmlLink": "https://www.google.com/calendar/event?eid=OWZxYnViMWpzbW82b2dncTlwYWd1ZTR0czAgMDhuNTE4cXViMDVyajcycjQ0aDJldDU3aTRAZw",
-		   "created": "2015-02-05T16:31:09.000Z",
-		   "updated": "2015-02-08T22:39:41.457Z",
-		   "summary": "Something Happening",
-		   "description": "This is a description of the place where stuff is happening.",
-		   "location": "Somewhere Nice",
-		   "creator": {
-			"email": "brian.cribb@gmail.com",
-			"displayName": "Brian Cribb"
-		   },
-		   "organizer": {
-			"email": "08n518qub05rj72r44h2et57i4@group.calendar.google.com",
-			"displayName": "Webdev Test",
-			"self": true
-		   },
-		   "start": {
-			"date": "2015-02-09"
-		   },
-		   "end": {
-			"date": "2016-01-10"
-		   },
-		   "transparency": "transparent",
-		   "iCalUID": "9fqbub1jsmo6oggq9pague4ts0@google.com",
-		   "sequence": 0
-		  }
-		 ]
+				"kind": "calendar#event",
+				"etag": "\"2835594223344000\"",
+				"id": "n578q7v8ktg6mok5i3hs762ofk",
+				"status": "confirmed",
+				"htmlLink": "https://www.google.com/calendar/event?eid=bjU3OHE3djhrdGc2bW9rNWkzaHM3NjJvZmsgMDhuNTE4cXViMDVyajcycjQ0aDJldDU3aTRAZw",
+				"created": "2015-02-05T16:31:23.000Z",
+				"updated": "2015-02-05T16:31:51.672Z",
+				"summary": "More Stuff",
+				"description": "Somewhere you can get many, many tacos.",
+				"location": "Portland, ME, USA",
+				"creator": {
+					"email": "brian.cribb@gmail.com",
+					"displayName": "Brian Cribb"
+				},
+				"organizer": {
+					"email": "08n518qub05rj72r44h2et57i4@group.calendar.google.com",
+					"displayName": "Webdev Test",
+					"self": true
+				},
+				"start": {
+					"date": "2015-02-26"
+				},
+				"end": {
+					"date": "2015-02-27"
+				},
+				"transparency": "transparent",
+				"iCalUID": "n578q7v8ktg6mok5i3hs762ofk@google.com",
+				"sequence": 0
+			},
+			{
+				"kind": "calendar#event",
+				"etag": "\"2835594313790000\"",
+				"id": "qq1mhh3dqmtkhbf5armb74r6ls",
+				"status": "confirmed",
+				"htmlLink": "https://www.google.com/calendar/event?eid=cXExbWhoM2RxbXRraGJmNWFybWI3NHI2bHMgMDhuNTE4cXViMDVyajcycjQ0aDJldDU3aTRAZw",
+				"created": "2015-02-05T16:32:36.000Z",
+				"updated": "2015-02-05T16:32:36.895Z",
+				"summary": "Weird Night of Things",
+				"description": "Never know what will happen at one of these.",
+				"location": "That guy's house",
+				"creator": {
+					"email": "brian.cribb@gmail.com",
+					"displayName": "Brian Cribb"
+				},
+				"organizer": {
+						"email": "08n518qub05rj72r44h2et57i4@group.calendar.google.com",
+						"displayName": "Webdev Test",
+					"self": true
+				},
+				"start": {
+					"date": "2015-02-31"
+				},
+				"end": {
+					"date": "2015-02-01"
+				},
+				"transparency": "transparent",
+				"iCalUID": "qq1mhh3dqmtkhbf5armb74r6ls@google.com",
+				"sequence": 0
+			},
+			{
+				"kind": "calendar#event",
+				"etag": "\"2835594361586000\"",
+				"id": "gqb8sldpq9v04je2ra1pru7qnc",
+				"status": "confirmed",
+				"htmlLink": "https://www.google.com/calendar/event?eid=Z3FiOHNsZHBxOXYwNGplMnJhMXBydTdxbmMgMDhuNTE4cXViMDVyajcycjQ0aDJldDU3aTRAZw",
+				"created": "2015-02-05T16:33:00.000Z",
+				"updated": "2015-02-05T16:33:00.793Z",
+				"summary": "Random Event",
+				"description": "Random details",
+				"location": "Random Place",
+				"creator": {
+					"email": "brian.cribb@gmail.com",
+					"displayName": "Brian Cribb"
+				},
+				"organizer": {
+					"email": "08n518qub05rj72r44h2et57i4@group.calendar.google.com",
+					"displayName": "Webdev Test",
+					"self": true
+				},
+				"start": {
+					"date": "2015-02-06"
+				},
+				"end": {
+					"date": "2015-02-07"
+				},
+				"transparency": "transparent",
+				"iCalUID": "gqb8sldpq9v04je2ra1pru7qnc@google.com",
+				"sequence": 0
+			},
+			{
+				"kind": "calendar#event",
+				"etag": "\"2835594407460000\"",
+				"id": "f9u2vhjrm37c7ks69cr6v6230o",
+				"status": "confirmed",
+				"htmlLink": "https://www.google.com/calendar/event?eid=Zjl1MnZoanJtMzdjN2tzNjljcjZ2NjIzMG8gMDhuNTE4cXViMDVyajcycjQ0aDJldDU3aTRAZw",
+				"created": "2015-02-05T16:33:23.000Z",
+				"updated": "2015-02-05T16:33:23.730Z",
+				"summary": "Testing Things",
+				"description": "For SCIENCE.",
+				"location": "My laboratory",
+				"creator": {
+					"email": "brian.cribb@gmail.com",
+					"displayName": "Brian Cribb"
+				},
+				"organizer": {
+					"email": "08n518qub05rj72r44h2et57i4@group.calendar.google.com",
+					"displayName": "Webdev Test",
+					"self": true
+				},
+				"start": {
+					"date": "2015-02-15"
+				},
+				"end": {
+					"date": "2015-02-16"
+				},
+				"transparency": "transparent",
+				"iCalUID": "f9u2vhjrm37c7ks69cr6v6230o@google.com",
+				"sequence": 0
+			},
+			{
+				"kind": "calendar#event",
+				"etag": "\"2835594484154000\"",
+				"id": "vn3ig80srl193mnh5l9kbbr25g",
+				"status": "confirmed",
+				"htmlLink": "https://www.google.com/calendar/event?eid=dm4zaWc4MHNybDE5M21uaDVsOWtiYnIyNWcgMDhuNTE4cXViMDVyajcycjQ0aDJldDU3aTRAZw",
+				"created": "2015-02-05T16:34:02.000Z",
+				"updated": "2015-02-05T16:34:02.077Z",
+				"summary": "One More Time",
+				"description": "Another test event with random stuff in it.",
+				"location": "Washington, DC, USA",
+				"creator": {
+					"email": "brian.cribb@gmail.com",
+					"displayName": "Brian Cribb"
+				},
+				"organizer": {
+					"email": "08n518qub05rj72r44h2et57i4@group.calendar.google.com",
+					"displayName": "Webdev Test",
+					"self": true
+				},
+				"start": {
+					"date": "2015-02-18"
+				},
+				"end": {
+					"date": "2015-02-19"
+				},
+				"transparency": "transparent",
+				"iCalUID": "vn3ig80srl193mnh5l9kbbr25g@google.com",
+				"sequence": 0
+			},
+			{
+				"kind": "calendar#event",
+				"etag": "\"2836156762914000\"",
+				"id": "9fqbub1jsmo6oggq9pague4ts0",
+				"status": "confirmed",
+				"htmlLink": "https://www.google.com/calendar/event?eid=OWZxYnViMWpzbW82b2dncTlwYWd1ZTR0czAgMDhuNTE4cXViMDVyajcycjQ0aDJldDU3aTRAZw",
+				"created": "2015-02-05T16:31:09.000Z",
+				"updated": "2015-02-08T22:39:41.457Z",
+				"summary": "Something Happening",
+				"description": "This is a description of the place where stuff is happening.",
+				"location": "Somewhere Nice",
+				"creator": {
+					"email": "brian.cribb@gmail.com",
+					"displayName": "Brian Cribb"
+				},
+				"organizer": {
+					"email": "08n518qub05rj72r44h2et57i4@group.calendar.google.com",
+					"displayName": "Webdev Test",
+					"self": true
+				},
+				"start": {
+					"date": "2015-02-09"
+				},
+				"end": {
+					"date": "2015-02-10"
+				},
+				"transparency": "transparent",
+				"iCalUID": "9fqbub1jsmo6oggq9pague4ts0@google.com",
+				"sequence": 0
+			}
+			]
 	}
 
 	var formattedDateSpan = function(startDateString, endDateString) {
@@ -250,10 +250,10 @@ var setupCalendarData = function() {
 			// Add the strings together. We display the ending month no matter what, since the month or year will be different. Year strings might be empty.
 			myString += startYear + ' - ' + monthNamesAbbr[ myEndDate.getMonth() ] + ' ' + myEndDate.getUTCDate() + endYear;
 			/*
-			 * Ex. 'Jan 6' + ', 2014' + ' - ' + 'Feb' + ' ' + '4' + ', ' + '2015'
-			 * If in different years, the final string would be:			"Jan 6, 2014 - Feb 4, 2015"
-			 * Same year with different month, the final string would be:	"Jan 6 - Feb 4"
-			 */
+				* Ex. 'Jan 6' + ', 2014' + ' - ' + 'Feb' + ' ' + '4' + ', ' + '2015'
+				* If in different years, the final string would be:			"Jan 6, 2014 - Feb 4, 2015"
+				* Same year with different month, the final string would be:	"Jan 6 - Feb 4"
+				*/
 		}
 		return myString;
 	}
@@ -279,8 +279,8 @@ var setupCalendarData = function() {
 		});
 
 		/*
-		 * In a real AJAX call, Calendar Moment would be called at this point. For now, we're just returning the data.
-		 * calendarMoment.init( $targetCalendar, moment(), cmEvents);
+			* In a real AJAX call, Calendar Moment would be called at this point. For now, we're just returning the data.
+			* calendarMoment.init( $targetCalendar, moment(), cmEvents);
 		*/
 	//} , failure);
 
