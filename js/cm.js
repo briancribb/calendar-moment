@@ -4,9 +4,6 @@ var CM = {
 		CM.events = settings.events;
 		CM.$targetCalendar = settings.$targetCalendar;
 		var targetMoment = settings.targetMoment;
-		console.log('CM.events:');
-		console.log(CM.events);
-		console.log(' ');
 
 
 		CM.$targetCalendar.on( "click", ".cm_nav button", function( event ) {
@@ -24,7 +21,6 @@ var CM = {
 
 		/*
 		$(window).resize( $.debounce( 250, function() {
-			//console.log('Resizing.');
 			CM.equalHeight(true);
 		} ) );
 		*/
@@ -55,15 +51,11 @@ var CM = {
 		for (var i = 0; i < totalDays; i++) {
 			var extraClasses = '',
 				calendarEvent = buildEvent( parseInt( currentMoment.format("YYYYMMDD") ) );
-			//console.log(calendarEvent);
 			if ( dayCounter < 1 || dayCounter > daysInThisMonth ) {
 				extraClasses += ' out_of_range';
 			}
-			if (calendarEvent.eventString === '') {
-				extraClasses += ' no_event';
-			} else {
-				extraClasses += calendarEvent.eventClass;
-			}
+			extraClasses += (calendarEvent.hasEvent === true) ? ' has_event' : ' no_event'
+
 			var eventSpanString =	CM.events[ calendarEvent.eventIndex ].momentStart.format("Do") + 
 									' - ' + 
 									CM.events[ calendarEvent.eventIndex ].momentEnd.format("Do");
@@ -86,7 +78,7 @@ var CM = {
 			dayCounter ++;
 			calendarString += dayString;
 
-			currentMoment.add('days', 1);
+			currentMoment.add(1,'days');
 		}
 		calendarString += ('</ul>' + closingString);
 		CM.$targetCalendar.addClass('cm').html( calendarString ).find('.cm_body').addClass('justAddedThis');
@@ -94,22 +86,20 @@ var CM = {
 
 		function buildEvent( currentMomentInt ) {
 			var eventString = '',
-				eventClass = '',
 				eventIndex = 0,
 				dataAttr = '',
 				buildEventMarkup = function(index, classToAdd) {
 					eventIndex = index;
-					eventClass = classToAdd;
 					dataAttr += ' data-event-index="' + index + '"'
 					//return '<!-- Event Markup -->';
 
-					return	'<div class="cm_event"' + dataAttr + '>' + 
+					return	'<div class="cm_event' + classToAdd + '"' + dataAttr + '>' + 
 								'<div class="cm_event__content">' + 
 									'<div class="cm_event__title">' + 
 										'<a class="cm_event__link" target="_blank" href="' + CM.events[index].url + '">' + CM.events[index].summary + '</a>' + 
 									'</div>' + 
-									'<div class="cm_event__location">' + CM.events[index].location + '</div>' + 
-									'<div class="cm_event__desc"></div>' + 
+									//'<div class="cm_event__location">' + CM.events[index].location + '</div>' + 
+									//'<div class="cm_event__desc"></div>' + 
 								'</div>' + 
 							'</div>';
 
@@ -120,15 +110,21 @@ var CM = {
 					eventEndInt			= parseInt( moment(CM.events[j].endTime).format("YYYYMMDD") );
 
 				if ( currentMomentInt === eventStartInt ) {
-					eventString = buildEventMarkup(j, ' cm_event--start');
+					if ( currentMomentInt === eventEndInt ) {
+						// If start and end dates are the same, no extra class is passed in.
+						eventString = buildEventMarkup(j, '');
+					} else {
+						// Start of a multi-day event.
+						eventString = buildEventMarkup(j, ' cm_event--start');
+					}
 				} else if ( currentMomentInt === eventEndInt ) {
 					eventString = buildEventMarkup(j, ' cm_event--end');
 				} else if ( currentMomentInt > eventStartInt && currentMomentInt < eventEndInt ) {
 					eventString = buildEventMarkup(j, ' cm_event--middle');
 				}
 			}
-
-			return {eventString:eventString, eventClass:eventClass, eventIndex:eventIndex};
+			var hasEvent = (eventString === '') ? false : true;
+			return {hasEvent:hasEvent, eventString:eventString, eventIndex:eventIndex};
 		}
 
 		function initBuild() {
@@ -155,12 +151,11 @@ var CM = {
 			}
 			CM.$dayCells = CM.$targetCalendar.find('.cm_day');
 			CM.$eventCells = CM.$targetCalendar.find('.cm_event');
-			//CM.equalHeight(true);
+			CM.equalHeight(true);
 		}
 		return initBuild();
 	},
 	equalHeight: function(clearValue) {
-		//console.log('equalHeight()');
 		"use strict";
 		var tallest = 0;
 

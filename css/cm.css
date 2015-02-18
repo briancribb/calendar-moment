@@ -142,6 +142,8 @@ ul.cm_weekdays > li {
   border: 1px solid #666666;
   max-height: 60px;
   overflow: hidden;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .cm_event__content {
@@ -152,36 +154,35 @@ ul.cm_weekdays > li {
   font-size: 12.6px;
 }
 
-.cm_event--start .cm_event {
-  margin-left: 5px;
+.cm_event.cm_event--start {
+  margin: 0 0 0 5px;
   border-right: none;
 }
 
-.cm_event--middle .cm_event {
+.cm_event.cm_event--middle {
   border-right: none;
   border-left: none;
   margin: 0 -1px;
 }
 
-.cm_event--end .cm_event {
-  margin-right: 5px;
+.cm_event.cm_event--end {
+  margin: 0 5px 0 -1px;
   border-left: none;
-  margin-left: -1px;
 }
 
 .cm_event--middle .cm_event__content, .cm_event--end .cm_event__content {
   display: none;
 }
 
-.cm_day:last-of-type.cm_event--middle .cm_event {
+.cm_day:last-of-type .cm_event.cm_event--middle {
   margin-right: 0;
 }
 
-.cm_day:first-of-type.cm_event--middle .cm_event, .cm_day:first-of-type.cm_event--end .cm_event {
+.cm_day:first-of-type .cm_event.cm_event--middle, .cm_day:first-of-type .cm_event.cm_event--end {
   margin-left: 0;
 }
 
-.cm_day:first-of-type.cm_event--middle .cm_event__content, .cm_day:first-of-type.cm_event--end .cm_event__content {
+.cm_day:first-of-type .cm_event.cm_event--middle .cm_event__content, .cm_day:first-of-type .cm_event.cm_event--end .cm_event__content {
   display: block;
 }
 

@@ -88,7 +88,7 @@ var setupCalendarData = function() {
 					"self": true
 				},
 				"start": {
-					"date": "2015-02-31"
+					"date": "2015-02-01"
 				},
 				"end": {
 					"date": "2015-02-01"
@@ -121,7 +121,7 @@ var setupCalendarData = function() {
 					"date": "2015-02-06"
 				},
 				"end": {
-					"date": "2015-02-07"
+					"date": "2015-02-08"
 				},
 				"transparency": "transparent",
 				"iCalUID": "gqb8sldpq9v04je2ra1pru7qnc@google.com",
@@ -211,7 +211,7 @@ var setupCalendarData = function() {
 					"date": "2015-02-09"
 				},
 				"end": {
-					"date": "2015-02-10"
+					"date": "2015-02-11"
 				},
 				"transparency": "transparent",
 				"iCalUID": "9fqbub1jsmo6oggq9pague4ts0@google.com",

@@ -1,4 +1,234 @@
 @charset "UTF-8";
 
-@import "cm-base";
-// Using a base file because you might decide to add more modules to this as you customize it.
+$baseFontSize:				14px;
+$colorDayBorder:			#333;
+$colorEventBorder:			#666;
+$colorEventBackground:		#ddd;
+$colorOutOfRange:			#cecece;
+$colorButton:				#ddd;
+$palmSize:					768px;
+$border-radius:				0;
+ul {
+	margin:0;
+	padding:0;
+}
+
+.cm {
+	font-size: $baseFontSize;
+	clear:both;
+	max-width: 1200px;
+	display: block;
+	margin: 0 auto;
+}
+.cm_header {
+	display: block;
+	width:100%;
+	margin-bottom: 10px;
+}
+.cm_header:after, .cm:after, .cm_weekdays:after, .cm_week:after {
+	content:"";
+	display:block;
+	clear:both;
+}
+	.cm_title {
+		font-size:1.5em;
+		float:left;
+	}
+	.cm_nav {
+		width:200px;
+		display:block;
+		float:right;
+		margin-right: 10px;
+	}
+	.cm_nav button {
+		width:33.3%;
+		height:25px;
+		float:left;
+		margin:0;
+		padding:0;
+		background: $colorButton;
+	}
+	.cm_nav button.prev {
+		border-radius: 7px 0 0 7px;
+	}
+	.cm_nav button.next {
+		border-radius: 0  7px 7px 0;
+	}
+.cm_body {
+	//display: table;
+	//height: 100px;
+	position:relative;
+	width:100%;
+	display:table;
+	table-layout:fixed;
+	width:100%;
+	margin:0;
+	padding:0;
+	//border-left: 1px solid $colorDayBorder;
+	//border-bottom: none;
+}
+ul.cm_weekdays {
+	display:table-row;
+	& > li {
+		height:auto;
+	}
+}
+.cm_week {
+	display:table-row;
+	//border-right: 1px solid $colorDayBorder;
+	/*
+	position:relative;
+	display:table-row;
+	li {
+		min-height: 120px;
+		display:table-cell;
+	}
+	*/
+	&:last-child > li {
+		border-bottom: 1px solid $colorDayBorder;
+	}
+}
+.cm li {
+
+	list-style-type:none;
+	display: table-cell;
+	width:100%;
+	//width: 14.2%;
+	height:100px;
+	border-right: 1px solid $colorDayBorder;
+	border-top: 1px solid $colorDayBorder;
+	box-sizing: border-box;
+	&:first-child {
+		border-left: 1px solid $colorDayBorder;
+	}
+	/*
+	list-style-type: none;
+	box-sizing: border-box;
+	width: 14.2%;
+	padding-bottom: 5px;
+	display: block;
+	float: left;
+	border: 1px solid $colorDayBorder;
+	margin-right: -1px;
+	margin-bottom: -1px;
+	overflow: visible!important;
+	*/
+}
+.cm li .cm_day, .cm li .cm_month {
+	display: none;
+}
+.cm li.out_of_range {
+	background-color: $colorOutOfRange;
+	color: darken($colorOutOfRange, 40%);
+}
+
+.cm_weekdays {
+	text-align: center;
+}
+
+.cm .cm_day_cell {
+	text-align: right;
+	margin-bottom: 5px;
+}
+
+.cm_date-title {
+	margin: 5px;
+}
+.cm_date-span {
+	display:none;
+}
+.cm .cm_event {
+	font-size: $baseFontSize*.8;
+	text-align: left;
+	background:$colorEventBackground;
+	border: 1px solid $colorEventBorder;
+	max-height: 60px;
+	overflow: hidden;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+	.cm_event__content {
+		padding:5px;
+	}
+
+.cm .cm_event__title {
+	font-size: $baseFontSize*.9;
+}
+
+.cm_event.cm_event--start {
+	margin: 0 0 0 5px;
+	border-right:none;
+}
+.cm_event.cm_event--middle {
+	border-right:none;
+	border-left:none;
+	margin: 0 -1px;
+}
+.cm_event.cm_event--end {
+	margin: 0 5px 0 -1px;
+	border-left:none;
+}
+
+// Hide text on all but first event.
+.cm_event--middle .cm_event__content, .cm_event--end .cm_event__content {
+	display:none;
+}
+// Except where they're on the sides of the calendar.
+.cm_day:last-of-type .cm_event.cm_event--middle {
+	margin-right:0;
+}
+.cm_day:first-of-type .cm_event.cm_event--middle, .cm_day:first-of-type .cm_event.cm_event--end {
+	margin-left:0;
+}
+.cm_day:first-of-type .cm_event.cm_event--middle .cm_event__content, .cm_day:first-of-type .cm_event.cm_event--end .cm_event__content {
+	display:block;
+}
+
+
+@media only screen and (max-width : $palmSize) {
+	.cm li.out_of_range, .cm li.no_event {
+		display:none;
+	}
+
+	.cm_event--start .cm_event, .cm_event--middle .cm_event, .cm_event--end .cm_event {
+		margin-left:5px;
+		margin-right:5px;
+		border:1px solid $colorEventBorder;
+	}
+
+	.cm_title {
+		float:none;
+		text-align: center;
+		margin-bottom:10px;
+	}
+	.cm_nav {
+		float:none;
+		margin: 0 auto;
+	}
+	.cm .cm_weekdays {
+		display: none;
+	}
+	.cm .cm_day-cell {
+		text-align: center;
+	}
+	.cm li{
+		display:block;
+		height: auto!important;
+		border: 1px solid $colorDayBorder;
+		width: 100%;
+		padding: 10px;
+		margin-bottom: -1px;
+	}
+	.cm_day-cell {
+		height:auto;
+	}
+	.cm li .cm_day, .cm li .cm_month{
+		display: inline;
+	}
+	.cm_date-span {
+		display:block;
+	}
+	.cm li.cm_out-of-range, .cm li.cm_empty, .cm li.cm_event--end {
+		display: none;
+	}
+}
