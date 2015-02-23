@@ -121,7 +121,7 @@ var setupCalendarData = function() {
 					"date": "2015-02-06"
 				},
 				"end": {
-					"date": "2015-02-08"
+					"date": "2015-02-10"
 				},
 				"transparency": "transparent",
 				"iCalUID": "gqb8sldpq9v04je2ra1pru7qnc@google.com",

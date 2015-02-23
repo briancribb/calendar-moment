@@ -142,8 +142,7 @@ ul.cm_weekdays > li {
   border: 1px solid #666666;
   max-height: 60px;
   overflow: hidden;
-  margin-left: 5px;
-  margin-right: 5px;
+  margin: 0 5px 5px;
 }
 
 .cm_event__content {
@@ -155,18 +154,21 @@ ul.cm_weekdays > li {
 }
 
 .cm_event.cm_event--start {
-  margin: 0 0 0 5px;
   border-right: none;
+  margin-left: 5px;
+  margin-right: 0;
 }
 
 .cm_event.cm_event--middle {
   border-right: none;
   border-left: none;
-  margin: 0 -1px;
+  margin-right: -1px;
+  margin-left: -1px;
 }
 
 .cm_event.cm_event--end {
-  margin: 0 5px 0 -1px;
+  margin-right: 5px;
+  margin-left: -1px;
   border-left: none;
 }
 
@@ -191,10 +193,14 @@ ul.cm_weekdays > li {
     display: none;
   }
 
-  .cm_event--start .cm_event, .cm_event--middle .cm_event, .cm_event--end .cm_event {
+  .cm_event.cm_event--start, .cm_event.cm_event--middle, .cm_event.cm_event--end {
     margin-left: 5px;
     margin-right: 5px;
     border: 1px solid #666666;
+  }
+
+  .cm_event--middle .cm_event__content, .cm_event--end .cm_event__content {
+    display: block;
   }
 
   .cm_title {

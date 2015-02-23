@@ -50,22 +50,22 @@ var CM = {
 
 		for (var i = 0; i < totalDays; i++) {
 			var extraClasses = '',
-				calendarEvent = buildEvent( parseInt( currentMoment.format("YYYYMMDD") ) );
+				calendarEvent = buildEvents( parseInt( currentMoment.format("YYYYMMDD") ) );
 			if ( dayCounter < 1 || dayCounter > daysInThisMonth ) {
 				extraClasses += ' out_of_range';
 			}
 			extraClasses += (calendarEvent.hasEvent === true) ? ' has_event' : ' no_event'
 
-			var eventSpanString =	CM.events[ calendarEvent.eventIndex ].momentStart.format("Do") + 
-									' - ' + 
-									CM.events[ calendarEvent.eventIndex ].momentEnd.format("Do");
+			//var eventSpanString =	CM.events[ calendarEvent.eventIndex ].momentStart.format("Do") + 
+			//						' - ' + 
+			//						CM.events[ calendarEvent.eventIndex ].momentEnd.format("Do");
 
 			var dayString =	'<li class="cm_day' + extraClasses + '">' + 
 								'<div class="cm_day-cell">' + 
 									'<div class="cm_date-title">' + 
-										//'<span class="cm_day-name">' + currentMoment.format("dddd") + ', </span>' + 
-										//'<span class="cm_month">' + currentMoment.format("MMM") + '</span>' + 
-										'<span class="cm_date">' + currentMoment.format("Do") + '</span>' + 
+										'<span class="cm_day-name">' + currentMoment.format("dddd") + ', </span>' + 
+										'<span class="cm_month">' + currentMoment.format("MMM") + '</span>' + 
+										'<span class="cm_date"> ' + currentMoment.format("Do") + '</span>' + 
 										//'<span class="cm_date-span">' + eventSpanString + '</span>' + 
 									'</div>' + 
 									calendarEvent.eventString + 
@@ -84,11 +84,12 @@ var CM = {
 		CM.$targetCalendar.addClass('cm').html( calendarString ).find('.cm_body').addClass('justAddedThis');
 
 
-		function buildEvent( currentMomentInt ) {
+		function buildEvents( currentMomentInt ) {
 			var eventString = '',
 				eventIndex = 0,
 				dataAttr = '',
 				buildEventMarkup = function(index, classToAdd) {
+					console.log('buildEventMarkup() index: ' + index + ', CM.events[index].summary: ' + CM.events[index].summary);
 					eventIndex = index;
 					dataAttr += ' data-event-index="' + index + '"'
 					//return '<!-- Event Markup -->';
@@ -112,17 +113,18 @@ var CM = {
 				if ( currentMomentInt === eventStartInt ) {
 					if ( currentMomentInt === eventEndInt ) {
 						// If start and end dates are the same, no extra class is passed in.
-						eventString = buildEventMarkup(j, '');
+						eventString += buildEventMarkup(j, '');
 					} else {
 						// Start of a multi-day event.
-						eventString = buildEventMarkup(j, ' cm_event--start');
+						eventString += buildEventMarkup(j, ' cm_event--start');
 					}
 				} else if ( currentMomentInt === eventEndInt ) {
-					eventString = buildEventMarkup(j, ' cm_event--end');
+					eventString += buildEventMarkup(j, ' cm_event--end');
 				} else if ( currentMomentInt > eventStartInt && currentMomentInt < eventEndInt ) {
-					eventString = buildEventMarkup(j, ' cm_event--middle');
+					eventString += buildEventMarkup(j, ' cm_event--middle');
 				}
 			}
+			//eventString += eventString;
 			var hasEvent = (eventString === '') ? false : true;
 			return {hasEvent:hasEvent, eventString:eventString, eventIndex:eventIndex};
 		}
