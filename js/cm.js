@@ -56,10 +56,6 @@ var CM = {
 			}
 			extraClasses += (calendarEvent.hasEvent === true) ? ' has_event' : ' no_event'
 
-			//var eventSpanString =	CM.events[ calendarEvent.eventIndex ].momentStart.format("Do") + 
-			//						' - ' + 
-			//						CM.events[ calendarEvent.eventIndex ].momentEnd.format("Do");
-
 			var dayString =	'<li class="cm_day' + extraClasses + '">' + 
 								'<div class="cm_day-cell">' + 
 									'<div class="cm_date-title">' + 
@@ -87,17 +83,15 @@ var CM = {
 		function buildEvents( currentMomentInt ) {
 			var eventString = '',
 				eventIndex = 0,
-				dataAttr = '',
 				buildEventMarkup = function(index, classToAdd) {
-					console.log('buildEventMarkup() index: ' + index + ', CM.events[index].summary: ' + CM.events[index].summary);
-					eventIndex = index;
-					dataAttr += ' data-event-index="' + index + '"'
+					//console.log('buildEventMarkup() index: ' + index + ', CM.events[index].summary: ' + CM.events[index].summary);
+					console.log('-' + index + '-');
 					//return '<!-- Event Markup -->';
 
-					return	'<div class="cm_event' + classToAdd + '"' + dataAttr + '>' + 
+					return	'<div class="cm_event' + classToAdd + '" data-event-index="' + index + '">' + 
 								'<div class="cm_event__content">' + 
 									'<div class="cm_event__title">' + 
-										'<a class="cm_event__link" target="_blank" href="' + CM.events[index].url + '">' + CM.events[index].summary + '</a>' + 
+										'<a class="cm_event__link" target="_blank" href="' + CM.events[index].url + '">' + CM.events[index].summary + ', ' + index + '</a>' + 
 									'</div>' + 
 									//'<div class="cm_event__location">' + CM.events[index].location + '</div>' + 
 									//'<div class="cm_event__desc"></div>' + 
@@ -126,7 +120,7 @@ var CM = {
 			}
 			//eventString += eventString;
 			var hasEvent = (eventString === '') ? false : true;
-			return {hasEvent:hasEvent, eventString:eventString, eventIndex:eventIndex};
+			return {hasEvent:hasEvent, eventString:eventString};
 		}
 
 		function initBuild() {

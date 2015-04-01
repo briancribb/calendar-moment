@@ -43,7 +43,7 @@ var setupCalendarData = function() {
 				"id": "n578q7v8ktg6mok5i3hs762ofk",
 				"status": "confirmed",
 				"htmlLink": "https://www.google.com/calendar/event?eid=bjU3OHE3djhrdGc2bW9rNWkzaHM3NjJvZmsgMDhuNTE4cXViMDVyajcycjQ0aDJldDU3aTRAZw",
-				"created": "2015-04-05T16:31:23.000Z",
+				"created": "2015-04-05CMT16:31:23.000Z",
 				"updated": "2015-04-05T16:31:51.672Z",
 				"summary": "More Stuff",
 				"description": "Somewhere you can get many, many tacos.",
@@ -58,10 +58,10 @@ var setupCalendarData = function() {
 					"self": true
 				},
 				"start": {
-					"date": "2015-04-26"
+					"date": "2015-04-01"
 				},
 				"end": {
-					"date": "2015-04-27"
+					"date": "2015-04-01"
 				},
 				"transparency": "transparent",
 				"iCalUID": "n578q7v8ktg6mok5i3hs762ofk@google.com",
@@ -88,10 +88,10 @@ var setupCalendarData = function() {
 					"self": true
 				},
 				"start": {
-					"date": "2015-04-01"
+					"date": "2015-04-04"
 				},
 				"end": {
-					"date": "2015-04-01"
+					"date": "2015-04-05"
 				},
 				"transparency": "transparent",
 				"iCalUID": "qq1mhh3dqmtkhbf5armb74r6ls@google.com",
@@ -121,7 +121,7 @@ var setupCalendarData = function() {
 					"date": "2015-04-06"
 				},
 				"end": {
-					"date": "2015-04-10"
+					"date": "2015-04-08"
 				},
 				"transparency": "transparent",
 				"iCalUID": "gqb8sldpq9v04je2ra1pru7qnc@google.com",
@@ -148,10 +148,10 @@ var setupCalendarData = function() {
 					"self": true
 				},
 				"start": {
-					"date": "2015-04-15"
+					"date": "2015-04-07"
 				},
 				"end": {
-					"date": "2015-04-16"
+					"date": "2015-04-09"
 				},
 				"transparency": "transparent",
 				"iCalUID": "f9u2vhjrm37c7ks69cr6v6230o@google.com",
@@ -208,10 +208,10 @@ var setupCalendarData = function() {
 					"self": true
 				},
 				"start": {
-					"date": "2015-04-09"
+					"date": "2015-04-22"
 				},
 				"end": {
-					"date": "2015-04-11"
+					"date": "2015-04-25"
 				},
 				"transparency": "transparent",
 				"iCalUID": "9fqbub1jsmo6oggq9pague4ts0@google.com",
