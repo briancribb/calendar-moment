@@ -85,7 +85,7 @@ var CM = {
 				eventIndex = 0,
 				buildEventMarkup = function(index, classToAdd) {
 					//console.log('buildEventMarkup() index: ' + index + ', CM.events[index].summary: ' + CM.events[index].summary);
-					console.log('-' + index + '-');
+					//console.log('-' + index + '-');
 					//return '<!-- Event Markup -->';
 
 					return	'<div class="cm_event' + classToAdd + '" data-event-index="' + index + '">' + 
@@ -107,7 +107,7 @@ var CM = {
 				if ( currentMomentInt === eventStartInt ) {
 					if ( currentMomentInt === eventEndInt ) {
 						// If start and end dates are the same, no extra class is passed in.
-						eventString += buildEventMarkup(j, '');
+						eventString += buildEventMarkup(j, ' cm_event--single');
 					} else {
 						// Start of a multi-day event.
 						eventString += buildEventMarkup(j, ' cm_event--start');
@@ -161,6 +161,7 @@ var CM = {
 				tallest = thisHeight;
 			}
 		}
+
 		if (clearValue) {
 			CM.$dayCells.removeAttr('height');
 			CM.$eventCells.removeAttr('height');
@@ -168,12 +169,24 @@ var CM = {
 
 		CM.$dayCells.each(function() {
 			checkHeight( $(this) );
+			$(this).attr( 'data-num-events', $(this).find('.cm_event').length );
 		}).css('min-height',tallest);
 
 		tallest = 0; // reseting tallest so we can do the day cells.
 
 		CM.$eventCells.each(function() {
 			checkHeight( $(this) );
+
+			var myIndex = $(this).closest('.cm_day').find('.cm_event').index( $(this) );
+			console.log('myIndex = ' + myIndex);
+
+
 		}).css('min-height',tallest);
 	}
 }
+
+
+
+
+
+

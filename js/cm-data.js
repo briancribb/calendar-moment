@@ -8,17 +8,8 @@
 
 	// https://console.developers.google.com/project
 
-	// Calendar ID for my test calendar
-	// 08n518qub05rj72r44h2et57i4@group.calendar.google.com
-
-	// API Key:
-	// AIzaSyDTG_U9jFru1SxYkcLkHFdBMKSDPBf5ENU
-
 	// url format.
 	https://www.googleapis.com/calendar/v3/calendars/{calendarid}/events?key={Your Public API Key}
-
-	// Working url string.
-https://www.googleapis.com/calendar/v3/calendars/08n518qub05rj72r44h2et57i4@group.calendar.google.com/events?key=AIzaSyDTG_U9jFru1SxYkcLkHFdBMKSDPBf5ENU&orderby=startTime&singleEvents=true&timeMin=2015-04-09T16:55:55.290Z
 
 */
 
@@ -258,35 +249,20 @@ var setupCalendarData = function() {
 		return myString;
 	}
 
-	//var calendarURL = "https://www.googleapis.com/calendar/v3/calendars/08n518qub05rj72r44h2et57i4@group.calendar.google.com/events?key=AIzaSyDTG_U9jFru1SxYkcLkHFdBMKSDPBf5ENU&orderby=startTime&singleEvents=true&timeMin=2015-04-09T16:55:55.290Z";
-	//$.when( $.ajax(calendarURL) ).then( function success(data) {
-	//	var json = data.feed.entry;
-		var json = fakeData;
-
-		$.each(json.items, function(i, item) {
-			var tempObject = {
-				summary			: item.summary,
-				startTime		: item.start.date,
-				endTime			: item.end.date,
-				location		: item.location,
-				description		: item.description,
-				mapLink			: "http://maps.google.com/maps?q=" + ( item.location.replace(/\s*,\s*/g, '+') ) + "&hl=en",
-				dateSpan		: formattedDateSpan( item.start.date, item.end.date ),
-				momentStart		: moment(item.start.date, 'YYYY-MM-DD'),
-				momentEnd		: moment(item.end.date, 'YYYY-MM-DD')
-			};
-			cmEvents.push(tempObject);
-		});
-
-		/*
-			* In a real AJAX call, Calendar Moment would be called at this point. For now, we're just returning the data.
-			* calendarMoment.init( $targetCalendar, moment(), cmEvents);
-		*/
-	//} , failure);
-
-	//var failure = function() {
-		//console.log( "The data failed somehow." );
-	//}
+	$.each(fakeData.items, function(i, item) {
+		var tempObject = {
+			summary			: item.summary,
+			startTime		: item.start.date,
+			endTime			: item.end.date,
+			location		: item.location,
+			description		: item.description,
+			mapLink			: "http://maps.google.com/maps?q=" + ( item.location.replace(/\s*,\s*/g, '+') ) + "&hl=en",
+			dateSpan		: formattedDateSpan( item.start.date, item.end.date ),
+			momentStart		: moment(item.start.date, 'YYYY-MM-DD'),
+			momentEnd		: moment(item.end.date, 'YYYY-MM-DD')
+		};
+		cmEvents.push(tempObject);
+	});
 
 	return cmEvents;
 }
