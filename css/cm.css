@@ -152,7 +152,7 @@ ul.cm_weekdays > li {
 .cm .cm_event__title {
   font-size: 12.6px;
 }
-
+/*
 .cm_event.cm_event--start {
   border-right: none;
   margin-left: 5px;
@@ -187,7 +187,7 @@ ul.cm_weekdays > li {
 .cm_day:first-of-type .cm_event.cm_event--middle .cm_event__content, .cm_day:first-of-type .cm_event.cm_event--end .cm_event__content {
   display: block;
 }
-
+*/
 @media only screen and (max-width: 768px) {
   .cm li.out_of_range, .cm li.no_event {
     display: none;

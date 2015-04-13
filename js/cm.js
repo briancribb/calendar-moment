@@ -85,7 +85,7 @@ var CM = {
 				eventIndex = 0,
 				buildEventMarkup = function(index, classToAdd) {
 					//console.log('buildEventMarkup() index: ' + index + ', CM.events[index].summary: ' + CM.events[index].summary);
-					console.log('-' + index + '-');
+					//console.log('-' + index + '-');
 					//return '<!-- Event Markup -->';
 
 					return	'<div class="cm_event' + classToAdd + '" data-event-index="' + index + '">' + 
@@ -172,8 +172,8 @@ var CM = {
 
 		tallest = 0; // reseting tallest so we can do the day cells.
 
-		CM.$eventCells.each(function() {
-			checkHeight( $(this) );
-		}).css('min-height',tallest);
+		//CM.$eventCells.each(function() {
+		//	checkHeight( $(this) );
+		//}).css('min-height',tallest);
 	}
 }
