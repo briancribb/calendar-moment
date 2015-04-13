@@ -8,17 +8,8 @@
 
 	// https://console.developers.google.com/project
 
-	// Calendar ID for my test calendar
-	// 08n518qub05rj72r44h2et57i4@group.calendar.google.com
-
-	// API Key:
-	// AIzaSyDTG_U9jFru1SxYkcLkHFdBMKSDPBf5ENU
-
 	// url format.
 	https://www.googleapis.com/calendar/v3/calendars/{calendarid}/events?key={Your Public API Key}
-
-	// Working url string.
-https://www.googleapis.com/calendar/v3/calendars/08n518qub05rj72r44h2et57i4@group.calendar.google.com/events?key=AIzaSyDTG_U9jFru1SxYkcLkHFdBMKSDPBf5ENU&orderby=startTime&singleEvents=true&timeMin=2015-04-09T16:55:55.290Z
 
 */
 
