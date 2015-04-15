@@ -174,20 +174,11 @@ var CM = {
 
 		tallest = 0; // reseting tallest so we can do the day cells.
 
-<<<<<<< HEAD
 		//CM.$eventCells.each(function() {
 		//	checkHeight( $(this) );
+		//	var myIndex = $(this).closest('.cm_day').find('.cm_event').index( $(this) );
+		//	console.log('myIndex = ' + myIndex);
 		//}).css('min-height',tallest);
-=======
-		CM.$eventCells.each(function() {
-			checkHeight( $(this) );
-
-			var myIndex = $(this).closest('.cm_day').find('.cm_event').index( $(this) );
-			console.log('myIndex = ' + myIndex);
-
-
-		}).css('min-height',tallest);
->>>>>>> origin/master
 	}
 }
 
