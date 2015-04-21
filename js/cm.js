@@ -58,12 +58,14 @@ var CM = {
 
 			var dayString =	'<li class="cm_day' + extraClasses + '">' + 
 								'<div class="cm_day-cell">' + 
-									'<div class="cm_date-title">' + 
-										'<span class="cm_day-name">' + currentMoment.format("dddd") + ', </span>' + 
-										'<span class="cm_month">' + currentMoment.format("MMM") + '</span>' + 
-										'<span class="cm_date"> ' + currentMoment.format("Do") + '</span>' + 
-										//'<span class="cm_date-span">' + eventSpanString + '</span>' + 
-									'</div>' + 
+									'<div class="cm_date">' + 
+										'<span class="cm_date--title">' +
+											currentMoment.format("dddd") + ', ' + 
+											currentMoment.format("MMM") + ' ' + 
+											currentMoment.format("Do") +
+										'</span>' + 
+										'<span class="cm_date--int">' + currentMoment.format("D") + '</span>' + 
+									'</div>' +
 									calendarEvent.eventString + 
 								'</div>' + 
 							'</li>';
@@ -101,21 +103,10 @@ var CM = {
 				};
 
 			for (var j = 0; j < CM.events.length; j++) {
-				var eventStartInt		= parseInt( moment(CM.events[j].startTime).format("YYYYMMDD") ),
-					eventEndInt			= parseInt( moment(CM.events[j].endTime).format("YYYYMMDD") );
-
+				var eventStartInt		= parseInt( moment(CM.events[j].startTime).format("YYYYMMDD") );
+					//eventEndInt			= parseInt( moment(CM.events[j].endTime).format("YYYYMMDD") );
 				if ( currentMomentInt === eventStartInt ) {
-					if ( currentMomentInt === eventEndInt ) {
-						// If start and end dates are the same, no extra class is passed in.
-						eventString += buildEventMarkup(j, ' cm_event--single');
-					} else {
-						// Start of a multi-day event.
-						eventString += buildEventMarkup(j, ' cm_event--start');
-					}
-				} else if ( currentMomentInt === eventEndInt ) {
-					eventString += buildEventMarkup(j, ' cm_event--end');
-				} else if ( currentMomentInt > eventStartInt && currentMomentInt < eventEndInt ) {
-					eventString += buildEventMarkup(j, ' cm_event--middle');
+					eventString += buildEventMarkup(j, '');
 				}
 			}
 			//eventString += eventString;

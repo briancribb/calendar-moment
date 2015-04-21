@@ -131,8 +131,11 @@ ul.cm_weekdays {
 	margin-bottom: 5px;
 }
 
-.cm_date-title {
-	margin: 5px;
+.cm_date {
+	padding:5px;
+}
+.cm_date--title {
+	display:none;
 }
 .cm_date-span {
 	display:none;
@@ -156,56 +159,9 @@ ul.cm_weekdays {
 	font-size: $baseFontSize*.9;
 }
 
-.cm_event.cm_event--start {
-	//margin: 0 0 0 5px;
-	border-right:none;
-	margin-left:5px;
-	margin-right:0;
-}
-.cm_event.cm_event--middle {
-	border-right:none;
-	border-left:none;
-	//margin: 0 -1px;
-	margin-right:-1px;
-	margin-left:-1px;
-}
-.cm_event.cm_event--end {
-	//margin: 0 5px 0 -1px;
-	margin-right:5px;
-	margin-left:-1px;
-	border-left:none;
-}
-
-// Hide text on all but first event.
-.cm_event--middle .cm_event__content, .cm_event--end .cm_event__content {
-	display:none;
-}
-// Except where they're on the sides of the calendar.
-.cm_day:last-of-type .cm_event.cm_event--middle {
-	margin-right:0;
-}
-.cm_day:first-of-type .cm_event.cm_event--middle, .cm_day:first-of-type .cm_event.cm_event--end {
-	margin-left:0;
-}
-.cm_day:first-of-type .cm_event.cm_event--middle .cm_event__content, .cm_day:first-of-type .cm_event.cm_event--end .cm_event__content {
-	display:block;
-}
-
-
 @media only screen and (max-width : $palmSize) {
 	.cm li.out_of_range, .cm li.no_event {
 		display:none;
-	}
-
-	.cm_event.cm_event--start, .cm_event.cm_event--middle, .cm_event.cm_event--end {
-		margin-left:5px;
-		margin-right:5px;
-		border:1px solid $colorEventBorder;
-	}
-
-	// Hide text on all but first event.
-	.cm_event--middle .cm_event__content, .cm_event--end .cm_event__content {
-		display:block;
 	}
 
 	.cm_title {
@@ -243,4 +199,12 @@ ul.cm_weekdays {
 	.cm li.cm_out-of-range, .cm li.cm_empty, .cm li.cm_event--end {
 		display: none;
 	}
+	.cm_date--title {
+		display:block;
+	}
+	.cm_date--int {
+		display:none;
+	}
+
+
 }
