@@ -1,13 +1,15 @@
 @charset "UTF-8";
 
 $baseFontSize:				14px;
+$baseSpacingUnit:			14px;
+$palmFontSize:				14px;
 $colorDayBorder:			#333;
 $colorEventBorder:			#666;
 $colorEventBackground:		#ddd;
 $colorOutOfRange:			#cecece;
 $colorButton:				#ddd;
 $palmSize:					768px;
-$border-radius:				0;
+$borderRadius:				0;
 ul {
 	margin:0;
 	padding:0;
@@ -39,20 +41,6 @@ ul {
 		display:block;
 		float:right;
 		margin-right: 10px;
-	}
-	.cm_nav button {
-		width:33.3%;
-		height:25px;
-		float:left;
-		margin:0;
-		padding:0;
-		background: $colorButton;
-	}
-	.cm_nav button.prev {
-		border-radius: 7px 0 0 7px;
-	}
-	.cm_nav button.next {
-		border-radius: 0  7px 7px 0;
 	}
 .cm_body {
 	//display: table;
@@ -114,9 +102,6 @@ ul.cm_weekdays {
 	overflow: visible!important;
 	*/
 }
-.cm li .cm_day, .cm li .cm_month {
-	display: none;
-}
 .cm li.out_of_range {
 	background-color: $colorOutOfRange;
 	color: darken($colorOutOfRange, 40%);
@@ -126,30 +111,36 @@ ul.cm_weekdays {
 	text-align: center;
 }
 
+.cm .cm_day {
+	padding: 7px;
+}
+
 .cm .cm_day_cell {
 	text-align: right;
 	margin-bottom: 5px;
 }
 
 .cm_date {
-	padding:5px;
+	margin-bottom: 5px;
+	line-height: 1;
 }
 .cm_date--title {
 	display:none;
-}
-.cm_date-span {
-	display:none;
+	float:none;
+	text-align: center;
+	margin-bottom:10px;
 }
 .cm .cm_event {
 	font-size: $baseFontSize*.8;
 	text-align: left;
 	background:$colorEventBackground;
 	border: 1px solid $colorEventBorder;
-	max-height: 60px;
-	overflow: hidden;
+	//max-height: 60px;
+	//overflow: hidden;
 	//margin-left: 5px;
 	//margin-right: 5px;
-	margin: 0 5px 5px;
+	margin-bottom: 5px;
+	border-radius: $borderRadius;
 }
 	.cm_event__content {
 		padding:5px;
@@ -160,10 +151,12 @@ ul.cm_weekdays {
 }
 
 @media only screen and (max-width : $palmSize) {
+	.cm, .cm .cm_event__title {
+		font-size: $palmFontSize;
+	}
 	.cm li.out_of_range, .cm li.no_event {
 		display:none;
 	}
-
 	.cm_title {
 		float:none;
 		text-align: center;
@@ -185,18 +178,12 @@ ul.cm_weekdays {
 		border: 1px solid $colorDayBorder;
 		width: 100%;
 		padding: 10px;
-		margin-bottom: -1px;
+		margin-bottom: $baseSpacingUnit;
 	}
 	.cm_day-cell {
 		height:auto;
 	}
-	.cm li .cm_day, .cm li .cm_month{
-		display: inline;
-	}
-	.cm_date-span {
-		display:block;
-	}
-	.cm li.cm_out-of-range, .cm li.cm_empty, .cm li.cm_event--end {
+	.cm li.cm_out-of-range, .cm li.cm_empty {
 		display: none;
 	}
 	.cm_date--title {
@@ -205,6 +192,4 @@ ul.cm_weekdays {
 	.cm_date--int {
 		display:none;
 	}
-
-
 }

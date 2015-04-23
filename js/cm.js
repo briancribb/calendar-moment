@@ -21,7 +21,7 @@ var CM = {
 
 		/*
 		$(window).resize( $.debounce( 250, function() {
-			CM.equalHeight(true);
+			CM.update();
 		} ) );
 		*/
 	},
@@ -79,7 +79,7 @@ var CM = {
 			currentMoment.add(1,'days');
 		}
 		calendarString += ('</ul>' + closingString);
-		CM.$targetCalendar.addClass('cm').html( calendarString ).find('.cm_body').addClass('justAddedThis');
+		CM.$targetCalendar.addClass('cm').html( calendarString ).find('.cm_body');
 
 
 		function buildEvents( currentMomentInt ) {
@@ -93,7 +93,7 @@ var CM = {
 					return	'<div class="cm_event' + classToAdd + '" data-event-index="' + index + '">' + 
 								'<div class="cm_event__content">' + 
 									'<div class="cm_event__title">' + 
-										'<a class="cm_event__link" target="_blank" href="' + CM.events[index].url + '">' + CM.events[index].summary + ', ' + index + '</a>' + 
+										'<a class="cm_event__link" target="_blank" href="' + CM.events[index].url + '">' + CM.events[index].summary + '</a>' + 
 									'</div>' + 
 									//'<div class="cm_event__location">' + CM.events[index].location + '</div>' + 
 									//'<div class="cm_event__desc"></div>' + 
@@ -138,9 +138,9 @@ var CM = {
 			}
 			CM.$dayCells = CM.$targetCalendar.find('.cm_day');
 			CM.$eventCells = CM.$targetCalendar.find('.cm_event');
-			CM.equalHeight(true);
+			CM.update();
 		}
-		return initBuild();
+		return initBuild(); // Fires initBuild() as the function finishes and returns.
 	},
 	equalHeight: function(clearValue) {
 		"use strict";
@@ -156,12 +156,13 @@ var CM = {
 		if (clearValue) {
 			CM.$dayCells.removeAttr('height');
 			CM.$eventCells.removeAttr('height');
+		} else {
+			CM.$dayCells.each(function() {
+				checkHeight( $(this) );
+				$(this).attr( 'data-num-events', $(this).find('.cm_event').length );
+			}).css('min-height',tallest);
 		}
 
-		CM.$dayCells.each(function() {
-			checkHeight( $(this) );
-			$(this).attr( 'data-num-events', $(this).find('.cm_event').length );
-		}).css('min-height',tallest);
 
 		tallest = 0; // reseting tallest so we can do the day cells.
 
@@ -170,11 +171,17 @@ var CM = {
 		//	var myIndex = $(this).closest('.cm_day').find('.cm_event').index( $(this) );
 		//	console.log('myIndex = ' + myIndex);
 		//}).css('min-height',tallest);
+	},
+	update: function() {
+		if ( !$('.cm_body .has_event').is(':visible') ) {
+			CM.$targetCalendar.addClass('month_no_events');
+		} else {
+			CM.$targetCalendar.removeClass('month_no_events');
+		}
+		if ( $('.cm_body .has_event').is(':visible') ) {
+			CM.equalHeight(true);
+		} else {
+
+		}
 	}
 }
-
-
-
-
-
-
