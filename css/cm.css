@@ -1,11 +1,11 @@
 @charset "UTF-8";
-/* line 11, cm.scss */
+/* line 13, cm.scss */
 ul {
   margin: 0;
   padding: 0;
 }
 
-/* line 16, cm.scss */
+/* line 18, cm.scss */
 .cm {
   font-size: 14px;
   clear: both;
@@ -14,27 +14,27 @@ ul {
   margin: 0 auto;
 }
 
-/* line 23, cm.scss */
+/* line 25, cm.scss */
 .cm_header {
   display: block;
   width: 100%;
   margin-bottom: 10px;
 }
 
-/* line 28, cm.scss */
+/* line 30, cm.scss */
 .cm_header:after, .cm:after, .cm_weekdays:after, .cm_week:after {
   content: "";
   display: block;
   clear: both;
 }
 
-/* line 33, cm.scss */
+/* line 35, cm.scss */
 .cm_title {
   font-size: 1.5em;
   float: left;
 }
 
-/* line 37, cm.scss */
+/* line 39, cm.scss */
 .cm_nav {
   width: 200px;
   display: block;
@@ -42,27 +42,7 @@ ul {
   margin-right: 10px;
 }
 
-/* line 43, cm.scss */
-.cm_nav button {
-  width: 33.3%;
-  height: 25px;
-  float: left;
-  margin: 0;
-  padding: 0;
-  background: #dddddd;
-}
-
-/* line 51, cm.scss */
-.cm_nav button.prev {
-  border-radius: 7px 0 0 7px;
-}
-
-/* line 54, cm.scss */
-.cm_nav button.next {
-  border-radius: 0  7px 7px 0;
-}
-
-/* line 57, cm.scss */
+/* line 45, cm.scss */
 .cm_body {
   position: relative;
   width: 100%;
@@ -73,16 +53,16 @@ ul {
   padding: 0;
 }
 
-/* line 70, cm.scss */
+/* line 58, cm.scss */
 ul.cm_weekdays {
   display: table-row;
 }
-/* line 72, cm.scss */
+/* line 60, cm.scss */
 ul.cm_weekdays > li {
   height: auto;
 }
 
-/* line 76, cm.scss */
+/* line 64, cm.scss */
 .cm_week {
   display: table-row;
   /*
@@ -94,12 +74,12 @@ ul.cm_weekdays > li {
   }
   */
 }
-/* line 87, cm.scss */
+/* line 75, cm.scss */
 .cm_week:last-child > li {
   border-bottom: 1px solid #333333;
 }
 
-/* line 91, cm.scss */
+/* line 79, cm.scss */
 .cm li {
   list-style-type: none;
   display: table-cell;
@@ -121,134 +101,127 @@ ul.cm_weekdays > li {
   overflow: visible!important;
   */
 }
-/* line 101, cm.scss */
+/* line 89, cm.scss */
 .cm li:first-child {
   border-left: 1px solid #333333;
 }
 
-/* line 117, cm.scss */
-.cm li .cm_day, .cm li .cm_month {
-  display: none;
-}
-
-/* line 120, cm.scss */
+/* line 105, cm.scss */
 .cm li.out_of_range {
   background-color: #cecece;
   color: #686868;
 }
 
-/* line 125, cm.scss */
+/* line 110, cm.scss */
 .cm_weekdays {
   text-align: center;
 }
 
-/* line 129, cm.scss */
+/* line 114, cm.scss */
+.cm .cm_day {
+  padding: 7px;
+}
+
+/* line 118, cm.scss */
 .cm .cm_day_cell {
   text-align: right;
   margin-bottom: 5px;
 }
 
-/* line 134, cm.scss */
+/* line 123, cm.scss */
 .cm_date {
-  padding: 5px;
+  margin-bottom: 5px;
+  line-height: 1;
 }
 
-/* line 137, cm.scss */
+/* line 127, cm.scss */
 .cm_date--title {
   display: none;
+  float: none;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
-/* line 140, cm.scss */
-.cm_date-span {
-  display: none;
-}
-
-/* line 143, cm.scss */
+/* line 133, cm.scss */
 .cm .cm_event {
   font-size: 11.2px;
   text-align: left;
   background: #dddddd;
   border: 1px solid #666666;
-  max-height: 60px;
-  overflow: hidden;
-  margin: 0 5px 5px;
+  margin-bottom: 5px;
+  border-radius: 0;
 }
 
-/* line 154, cm.scss */
+/* line 145, cm.scss */
 .cm_event__content {
   padding: 5px;
 }
 
-/* line 158, cm.scss */
+/* line 149, cm.scss */
 .cm .cm_event__title {
   font-size: 12.6px;
 }
 
 @media only screen and (max-width: 768px) {
-  /* line 163, cm.scss */
+  /* line 154, cm.scss */
+  .cm, .cm .cm_event__title {
+    font-size: 14px;
+  }
+
+  /* line 157, cm.scss */
   .cm li.out_of_range, .cm li.no_event {
     display: none;
   }
 
-  /* line 167, cm.scss */
+  /* line 160, cm.scss */
   .cm_title {
     float: none;
     text-align: center;
     margin-bottom: 10px;
   }
 
-  /* line 172, cm.scss */
+  /* line 165, cm.scss */
   .cm_nav {
     float: none;
     margin: 0 auto;
   }
 
-  /* line 176, cm.scss */
+  /* line 169, cm.scss */
   .cm .cm_weekdays {
     display: none;
   }
 
-  /* line 179, cm.scss */
+  /* line 172, cm.scss */
   .cm .cm_day-cell {
     text-align: center;
   }
 
-  /* line 182, cm.scss */
+  /* line 175, cm.scss */
   .cm li {
     display: block;
     height: auto!important;
     border: 1px solid #333333;
     width: 100%;
     padding: 10px;
-    margin-bottom: -1px;
+    margin-bottom: 14px;
   }
 
-  /* line 190, cm.scss */
+  /* line 183, cm.scss */
   .cm_day-cell {
     height: auto;
   }
 
-  /* line 193, cm.scss */
-  .cm li .cm_day, .cm li .cm_month {
-    display: inline;
-  }
-
-  /* line 196, cm.scss */
-  .cm_date-span {
-    display: block;
-  }
-
-  /* line 199, cm.scss */
-  .cm li.cm_out-of-range, .cm li.cm_empty, .cm li.cm_event--end {
+  /* line 186, cm.scss */
+  .cm li.cm_out-of-range, .cm li.cm_empty {
     display: none;
   }
 
-  /* line 202, cm.scss */
+  /* line 189, cm.scss */
   .cm_date--title {
     display: block;
   }
 
-  /* line 205, cm.scss */
+  /* line 192, cm.scss */
   .cm_date--int {
     display: none;
   }
