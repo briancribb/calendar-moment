@@ -22,7 +22,11 @@ var setupCalendarData = function() {
 			"etag": "\"1418078761809000\"",
 			"summary": "Webdev Test",
 			"description": "Just for testing.",
+<<<<<<< HEAD
 			"updated": "2016-03-08T22:46:01.809Z",
+=======
+			"updated": "2016-02-08T22:46:01.809Z",
+>>>>>>> origin/master
 			"timeZone": "America/New_York",
 			"accessRole": "reader",
 			"defaultReminders": [],
@@ -34,8 +38,13 @@ var setupCalendarData = function() {
 				"id": "n578q7v8ktg6mok5i3hs762ofk",
 				"status": "confirmed",
 				"htmlLink": "https://www.google.com/calendar/event?eid=bjU3OHE3djhrdGc2bW9rNWkzaHM3NjJvZmsgMDhuNTE4cXViMDVyajcycjQ0aDJldDU3aTRAZw",
+<<<<<<< HEAD
 				"created": "2016-03-05CMT16:31:23.000Z",
 				"updated": "2016-03-05T16:31:51.672Z",
+=======
+				"created": "2016-02-05CMT16:31:23.000Z",
+				"updated": "2016-02-05T17:31:51.672Z",
+>>>>>>> origin/master
 				"summary": "More Stuff",
 				"description": "Somewhere you can get many, many tacos.",
 				"location": "Portland, ME, USA",
@@ -49,10 +58,17 @@ var setupCalendarData = function() {
 					"self": true
 				},
 				"start": {
+<<<<<<< HEAD
 					"date": "2016-03-01"
 				},
 				"end": {
 					"date": "2016-03-03"
+=======
+					"date": "2016-02-01"
+				},
+				"end": {
+					"date": "2016-02-01"
+>>>>>>> origin/master
 				},
 				"transparency": "transparent",
 				"iCalUID": "n578q7v8ktg6mok5i3hs762ofk@google.com",
@@ -64,8 +80,13 @@ var setupCalendarData = function() {
 				"id": "qq1mhh3dqmtkhbf5armb74r6ls",
 				"status": "confirmed",
 				"htmlLink": "https://www.google.com/calendar/event?eid=cXExbWhoM2RxbXRraGJmNWFybWI3NHI2bHMgMDhuNTE4cXViMDVyajcycjQ0aDJldDU3aTRAZw",
+<<<<<<< HEAD
 				"created": "2016-03-05T16:32:36.000Z",
 				"updated": "2016-03-05T16:32:36.895Z",
+=======
+				"created": "2016-02-05T16:32:36.000Z",
+				"updated": "2016-02-05T17:32:36.895Z",
+>>>>>>> origin/master
 				"summary": "Weird Night of Things",
 				"description": "Never know what will happen at one of these.",
 				"location": "That guy's house",
@@ -79,10 +100,17 @@ var setupCalendarData = function() {
 					"self": true
 				},
 				"start": {
+<<<<<<< HEAD
 					"date": "2016-03-04"
 				},
 				"end": {
 					"date": "2016-03-05"
+=======
+					"date": "2016-02-04"
+				},
+				"end": {
+					"date": "2016-02-05"
+>>>>>>> origin/master
 				},
 				"transparency": "transparent",
 				"iCalUID": "qq1mhh3dqmtkhbf5armb74r6ls@google.com",
@@ -229,8 +257,13 @@ var setupCalendarData = function() {
 				"id": "n578q7v8ktg6mok5i3hs762ofk",
 				"status": "confirmed",
 				"htmlLink": "https://www.google.com/calendar/event?eid=bjU3OHE3djhrdGc2bW9rNWkzaHM3NjJvZmsgMDhuNTE4cXViMDVyajcycjQ0aDJldDU3aTRAZw",
+<<<<<<< HEAD
 				"created": "2016-03-05CMT16:31:23.000Z",
 				"updated": "2016-03-05T16:31:51.672Z",
+=======
+				"created": "2016-02-05CMT16:31:23.000Z",
+				"updated": "2016-02-05T16:31:51.672Z",
+>>>>>>> origin/master
 				"summary": "More Stuff",
 				"description": "Somewhere you can get many, many tacos.",
 				"location": "Portland, ME, USA",
@@ -244,10 +277,17 @@ var setupCalendarData = function() {
 					"self": true
 				},
 				"start": {
+<<<<<<< HEAD
 					"date": "2016-03-01"
 				},
 				"end": {
 					"date": "2016-03-01"
+=======
+					"date": "2016-02-01"
+				},
+				"end": {
+					"date": "2016-02-01"
+>>>>>>> origin/master
 				},
 				"transparency": "transparent",
 				"iCalUID": "n578q7v8ktg6mok5i3hs762ofk@google.com",
@@ -259,8 +299,13 @@ var setupCalendarData = function() {
 				"id": "qq1mhh3dqmtkhbf5armb74r6ls",
 				"status": "confirmed",
 				"htmlLink": "https://www.google.com/calendar/event?eid=cXExbWhoM2RxbXRraGJmNWFybWI3NHI2bHMgMDhuNTE4cXViMDVyajcycjQ0aDJldDU3aTRAZw",
+<<<<<<< HEAD
 				"created": "2016-03-05T16:32:36.000Z",
 				"updated": "2016-03-05T16:32:36.895Z",
+=======
+				"created": "2016-02-05T16:32:36.000Z",
+				"updated": "2016-02-05T16:32:36.895Z",
+>>>>>>> origin/master
 				"summary": "Weird Night of Things",
 				"description": "Never know what will happen at one of these.",
 				"location": "That guy's house",
@@ -274,10 +319,17 @@ var setupCalendarData = function() {
 					"self": true
 				},
 				"start": {
+<<<<<<< HEAD
 					"date": "2016-03-04"
 				},
 				"end": {
 					"date": "2016-03-04"
+=======
+					"date": "2016-02-04"
+				},
+				"end": {
+					"date": "2016-02-04"
+>>>>>>> origin/master
 				},
 				"transparency": "transparent",
 				"iCalUID": "qq1mhh3dqmtkhbf5armb74r6ls@google.com",
@@ -289,8 +341,13 @@ var setupCalendarData = function() {
 				"id": "gqb8sldpq9v04je2ra1pru7qnc",
 				"status": "confirmed",
 				"htmlLink": "https://www.google.com/calendar/event?eid=Z3FiOHNsZHBxOXYwNGplMnJhMXBydTdxbmMgMDhuNTE4cXViMDVyajcycjQ0aDJldDU3aTRAZw",
+<<<<<<< HEAD
 				"created": "2016-03-05T16:33:00.000Z",
 				"updated": "2016-03-05T16:33:00.793Z",
+=======
+				"created": "2016-02-05T16:33:00.000Z",
+				"updated": "2016-02-05T16:33:00.793Z",
+>>>>>>> origin/master
 				"summary": "Random Event",
 				"description": "Random details",
 				"location": "Random Place",
@@ -304,10 +361,17 @@ var setupCalendarData = function() {
 					"self": true
 				},
 				"start": {
+<<<<<<< HEAD
 					"date": "2016-03-06"
 				},
 				"end": {
 					"date": "2016-03-06"
+=======
+					"date": "2016-02-06"
+				},
+				"end": {
+					"date": "2016-02-06"
+>>>>>>> origin/master
 				},
 				"transparency": "transparent",
 				"iCalUID": "gqb8sldpq9v04je2ra1pru7qnc@google.com",
@@ -319,8 +383,13 @@ var setupCalendarData = function() {
 				"id": "f9u2vhjrm37c7ks69cr6v6230o",
 				"status": "confirmed",
 				"htmlLink": "https://www.google.com/calendar/event?eid=Zjl1MnZoanJtMzdjN2tzNjljcjZ2NjIzMG8gMDhuNTE4cXViMDVyajcycjQ0aDJldDU3aTRAZw",
+<<<<<<< HEAD
 				"created": "2016-03-05T16:33:23.000Z",
 				"updated": "2016-03-05T16:33:23.730Z",
+=======
+				"created": "2016-02-05T16:33:23.000Z",
+				"updated": "2016-02-05T16:33:23.730Z",
+>>>>>>> origin/master
 				"summary": "Testing Things",
 				"description": "For SCIENCE.",
 				"location": "My laboratory",
@@ -334,10 +403,17 @@ var setupCalendarData = function() {
 					"self": true
 				},
 				"start": {
+<<<<<<< HEAD
 					"date": "2016-03-07"
 				},
 				"end": {
 					"date": "2016-03-07"
+=======
+					"date": "2016-02-07"
+				},
+				"end": {
+					"date": "2016-02-07"
+>>>>>>> origin/master
 				},
 				"transparency": "transparent",
 				"iCalUID": "f9u2vhjrm37c7ks69cr6v6230o@google.com",
@@ -349,8 +425,13 @@ var setupCalendarData = function() {
 				"id": "vn3ig80srl193mnh5l9kbbr25g",
 				"status": "confirmed",
 				"htmlLink": "https://www.google.com/calendar/event?eid=dm4zaWc4MHNybDE5M21uaDVsOWtiYnIyNWcgMDhuNTE4cXViMDVyajcycjQ0aDJldDU3aTRAZw",
+<<<<<<< HEAD
 				"created": "2016-03-05T16:34:02.000Z",
 				"updated": "2016-03-05T16:34:02.077Z",
+=======
+				"created": "2016-02-05T16:34:02.000Z",
+				"updated": "2016-02-05T16:34:02.077Z",
+>>>>>>> origin/master
 				"summary": "One More Time",
 				"description": "Another test event with random stuff in it.",
 				"location": "Washington, DC, USA",
@@ -364,10 +445,17 @@ var setupCalendarData = function() {
 					"self": true
 				},
 				"start": {
+<<<<<<< HEAD
 					"date": "2016-03-18"
 				},
 				"end": {
 					"date": "2016-03-18"
+=======
+					"date": "2016-02-18"
+				},
+				"end": {
+					"date": "2016-02-18"
+>>>>>>> origin/master
 				},
 				"transparency": "transparent",
 				"iCalUID": "vn3ig80srl193mnh5l9kbbr25g@google.com",
@@ -473,6 +561,6 @@ var setupCalendarData = function() {
 	//var failure = function() {
 		//console.log( "The data failed somehow." );
 	//}
-
+	console.log(cmEvents);
 	return cmEvents;
 }
