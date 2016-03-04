@@ -11,7 +11,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"></script>
 		<script src="js/moment.js"></script>
 		<script src="js/cm-data.js"></script>
-		<script src="js/cm.js"></script>
+		<script src="js/cm-frag.js"></script>
 		<script>
 
 
@@ -20,10 +20,11 @@ $(document).ready(function() {
 	var calendarData = setupCalendarData(); // From separate file at the moment: calendar-data.js
 	//console.log(calendarData);
 
-	//calendarMoment.init( $('#calendar'), moment(), calendarData);
+	/*calendarMoment.init( $('#calendar'), moment(), calendarData);
 	CM.init({
-		$targetCalendar	: $('#calendar'), 
-		targetMoment	: moment(), 
+		id	: 'calendar', 
+		//$targetCalendar	: $('#calendar'), 
+		//targetMoment	: moment(), 
 		events			: calendarData
 	});
 
@@ -31,7 +32,8 @@ $(document).ready(function() {
 		//console.log('Resizing.');
 		CM.equalHeight();
 	} ) );
-
+	*/
+	CalendarMoment({id:'calendar'});
 
 });
 
