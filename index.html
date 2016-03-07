@@ -20,19 +20,18 @@ $(document).ready(function() {
 	var calendarData = setupCalendarData(); // From separate file at the moment: calendar-data.js
 	//console.log(calendarData);
 
-	/*calendarMoment.init( $('#calendar'), moment(), calendarData);
+	/*
 	CM.init({
-		id	: 'calendar', 
-		//$targetCalendar	: $('#calendar'), 
-		//targetMoment	: moment(), 
+		$targetCalendar	: $('#calendar'), 
+		targetMoment	: moment(), 
 		events			: calendarData
 	});
-
+	*/
 	$(window).resize( $.debounce( 250, function() {
 		//console.log('Resizing.');
-		CM.equalHeight();
+		//CM.equalHeight();
 	} ) );
-	*/
+	
 	CalendarMoment({id:'calendar'});
 
 });
