@@ -183,7 +183,7 @@
 
 
 	methods.build();
-	methods.empty(cmCalendar);
+	//methods.empty(cmCalendar);
 
 	return methods.expose;
 };
