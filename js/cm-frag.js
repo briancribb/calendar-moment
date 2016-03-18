@@ -1,71 +1,63 @@
 /* I'm going to rewrite this whole damned thing with document fragments and stuff. jQuery will not be required. */
 
 ;var CalendarMoment = function(settings){
+
 	/* Stuff we want in the closure. First, setup for the settings object. */	
-	var cmCalendar		= document.getElementById(settings.id),
-		daysOfWeek		= ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
-		targetMoment	= settings.targetMoment || moment();
-
-	/*
-	Some of the methods used to find things will set the moment object to the date we found. Making a copy 
-	called "currentMoment" so we don't alter the original targetMoment.
-	*/ 
-	var currentMoment	= targetMoment.clone();
-
-	var thisMonth		= currentMoment.month(),
-		daysInThisMonth	= currentMoment.daysInMonth(),
-		lastWeekdayNum	= currentMoment.date( currentMoment.daysInMonth() ).weekday(), // Careful, this sets the current month to it's last day.		
-		firstWeekdayNum	= currentMoment.date(1).weekday(); // Careful. Sets the current month to first day. Important to do this second!
-
-	var dayCounter		= 1 - firstWeekdayNum, // Starting current Day as the first day on the calendar, not the first day of the month.
-		lastDay			= (6 - lastWeekdayNum) + daysInThisMonth, // 6 instead of 7 because calendar starts at 1, not zero.
-		totalDays		= lastDay + firstWeekdayNum; // Total days on the calendar, not in the month.
-
-	currentMoment.date(dayCounter); // Sets the first calendar cell to the appropriate day.
 
 
 
-	console.log('targetMoment.format("MMMM, YYYY")');
-	console.log(targetMoment.format("MMMM, YYYY"));
-	console.log(' ');
 
-	console.log('currentMoment');
-	console.log(currentMoment);
-	console.log(' ');
 
-	console.log('thisMonth');
-	console.log(thisMonth);
-	console.log(' ');
 
-	console.log('daysInThisMonth');
-	console.log(daysInThisMonth);
-	console.log(' ');
 
-	console.log('lastWeekdayNum');
-	console.log(lastWeekdayNum);
-	console.log(' ');
 
-	console.log('firstWeekdayNum');
-	console.log(firstWeekdayNum);
-	console.log(' ');
 
-	console.log('dayCounter');
-	console.log(dayCounter);
-	console.log(' ');
 
-	console.log('lastDay');
-	console.log(lastDay);
-	console.log(' ');
+	/* Creating a parent settings object so we can console log a bunch of stuff at once during testing. */
+	var CM = {
+		targetMoment	: settings.targetMoment || moment(),
+		calendar		: document.getElementById(settings.id),
+		daysOfWeek		: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
+	}
 
-	console.log('totalDays');
-	console.log(totalDays);
-	console.log(' ');
+
+
 
 
 	var methods = {
-		build : function() {
+		empty0   : function(container) {
+		},
+		build : function(targetMoment) {
+
+			/*
+			Some of the methods used to find things will set the moment object to the date we found. Making a copy 
+			called "CM.currentMoment" so we don't alter the original targetMoment.
+			*/ 
+			CM.currentMoment	= CM.targetMoment.clone();
+
+			CM.month = {
+				id				: CM.currentMoment.month(),
+				daysInMonth		: CM.currentMoment.daysInMonth(),
+				lastWeekday		: CM.currentMoment.date( CM.currentMoment.daysInMonth() ).weekday(), // Careful, this sets the current month to it's last day.
+				firstWeekday	: CM.currentMoment.date(1).weekday() // Careful. Sets the current month to first day. Important to do this second!
+			};
+
+			CM.month.counter	= 1 - CM.month.firstWeekday; // Starting current Day as the first day on the calendar, not the first day of the month.
+			CM.month.lastDay	= (6 - CM.month.lastWeekday) + CM.month.daysInMonth; // 6 instead of 7 because calendar starts at 1, not zero.
+
+			CM.month.totalDays	= CM.month.lastDay + CM.month.firstWeekday; // Total days on the calendar, not in the month.
+
+
+			CM.currentMoment.date(CM.month.counter); // Sets the first calendar cell to the appropriate day.
+
+			console.log(CM);
+
+
+
+
+
 			/* Our master container element. */
-			cmCalendar.classList.add('cm');
+			CM.calendar.classList.add('cm');
 
 
 			/* Making our primary document fragment. */
@@ -119,9 +111,9 @@
 
 
 			/* Building the days of the week. */
-			for (var i = 0; i < daysOfWeek.length; i++) {
+			for (var i = 0; i < CM.daysOfWeek.length; i++) {
 				var tempLI = document.createElement('li');
-				tempLI.innerHTML = daysOfWeek[i];
+				tempLI.innerHTML = CM.daysOfWeek[i];
 				cmWeekdays.appendChild(tempLI);
 			};
 			/* Adding the days of the week to the weekdays list. */
@@ -130,13 +122,47 @@
 
 			/* Building the days of the month. */
 
+			/* Setting "i" as a counter for weeks, and tempWeek as the current week. */
+			var i = 0,
+				tempDay;
+			var tempWeek = buildWeekNode();
+
+			/* Loop through all of the days on the calendar, including the ones from next and/or previous months. */
+			for (var j = 0; j < CM.month.totalDays; j++) {
+
+				/* Create a new node in the tempDay variable. */
+				tempDay = document.createElement('li');
+				tempDay.innerHTML = 'Day ' + CM.month.counter;
 
 
+				/* If the current day is outside of the month (next or previous month) then add a class to show it. */
+				if ( CM.month.counter < 1 || CM.month.counter > CM.month.daysInMonth ) {
+					tempDay.classList.add('out_of_range');
+				}
 
+				/* Add the current day node to the current week node. */
+				tempWeek.appendChild(tempDay);
 
+				/* If we're at the end of a week, append the current week to the body and make a new one. Don't forget to increment "i". */
+				if ( (j +1) % 7 === 0 && CM.month.counter < CM.month.daysInMonth) {
+					cmBody.appendChild(tempWeek);
+					tempWeek = buildWeekNode();
+					i ++;
+				}
 
+				/* Increment the month counter. Remember that it's different because it's tracking the actual day of the month rather than the index of the loop. */
+				CM.month.counter ++;
+			};
 
+			/* After the loops are done, we'll have one leftover week that we need to append to the calendar body. */
+			cmBody.appendChild(tempWeek);
 
+			/* Simple function to build a week node and add the appropriate class. */
+			function buildWeekNode() {
+				node = document.createElement('ul');
+				node.classList.add('cm_week');
+				return node;
+			}
 
 
 
@@ -147,7 +173,7 @@
 
 
 			/* Add the completed fragment to the DOM. */
-			cmCalendar.appendChild(cmFragment);
+			CM.calendar.appendChild(cmFragment);
 		},
 		empty : function(container) {
 
@@ -175,15 +201,15 @@
 		},
 		expose : {
 			equalHeights : function() {
-				console.log('equalHeights(): ' + settings.text);
+				//console.log('equalHeights(): ' + settings.text);
 			}
 		}
 	};
 
 
 
-	methods.build();
-	//methods.empty(cmCalendar);
+	methods.build( moment() );
+	//methods.empty(CM.calendar);
 
 	return methods.expose;
 };
