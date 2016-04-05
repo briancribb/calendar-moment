@@ -449,7 +449,9 @@ var setupCalendarData = function() {
 	//	var json = data.feed.entry;
 		var json = fakeDataSingle;
 
-		$.each(json.items, function(i, item) {
+
+		for (var i = 0; i < json.items.length; i++) {
+			var item = json.items[i];
 			var tempObject = {
 				summary			: item.summary,
 				startTime		: item.start.date,
@@ -462,7 +464,10 @@ var setupCalendarData = function() {
 				momentEnd		: moment(item.end.date, 'YYYY-MM-DD')
 			};
 			cmEvents.push(tempObject);
-		});
+		};
+
+		//$.each(json.items, function(i, item) {
+		//});
 
 		/*
 			* In a real AJAX call, Calendar Moment would be called at this point. For now, we're just returning the data.

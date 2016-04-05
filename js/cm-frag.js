@@ -4,24 +4,15 @@
 
 	/* Stuff we want in the closure. First, setup for the settings object. */	
 
-
-
-
-
-
-
-
-
-
 	/* Creating a parent settings object so we can console log a bunch of stuff at once during testing. */
 	var CM = {
-		targetMoment	: settings.targetMoment || moment(),
+		targetMoment	: moment(settings.targetMoment, "MM-DD-YYYY") || moment(),
 		calendar		: document.getElementById(settings.id),
 		daysOfWeek		: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
 	}
 
 
-
+ 
 
 
 	var methods = {
@@ -37,6 +28,7 @@
 
 			CM.month = {
 				id				: CM.currentMoment.month(),
+				name			: CM.currentMoment.format('MMMM'),
 				daysInMonth		: CM.currentMoment.daysInMonth(),
 				lastWeekday		: CM.currentMoment.date( CM.currentMoment.daysInMonth() ).weekday(), // Careful, this sets the current month to it's last day.
 				firstWeekday	: CM.currentMoment.date(1).weekday() // Careful. Sets the current month to first day. Important to do this second!
@@ -51,9 +43,6 @@
 			CM.currentMoment.date(CM.month.counter); // Sets the first calendar cell to the appropriate day.
 
 			console.log(CM);
-
-
-
 
 
 			/* Our master container element. */
@@ -77,7 +66,7 @@
 			/* Setting classes for header elements. */
 			cmHeader.classList.add('cm_header');
 				cmTitle.classList.add('cm_title');
-					cmTitle.innerHTML = 'March';
+					cmTitle.innerHTML = CM.month.name;
 
 
 				cmNav.setAttribute('id', 'cm_nav');
@@ -132,7 +121,7 @@
 
 				/* Create a new node in the tempDay variable. */
 				tempDay = document.createElement('li');
-				tempDay.innerHTML = 'Day ' + CM.month.counter;
+				tempDay.innerHTML = CM.currentMoment.format("D")
 
 
 				/* If the current day is outside of the month (next or previous month) then add a class to show it. */
@@ -152,6 +141,7 @@
 
 				/* Increment the month counter. Remember that it's different because it's tracking the actual day of the month rather than the index of the loop. */
 				CM.month.counter ++;
+				CM.currentMoment.add(1,'days');
 			};
 
 			/* After the loops are done, we'll have one leftover week that we need to append to the calendar body. */
