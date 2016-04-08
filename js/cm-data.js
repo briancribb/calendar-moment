@@ -478,6 +478,6 @@ var setupCalendarData = function() {
 	//var failure = function() {
 		//console.log( "The data failed somehow." );
 	//}
-	//console.log(cmEvents);
+	console.log(cmEvents);
 	return cmEvents;
 }

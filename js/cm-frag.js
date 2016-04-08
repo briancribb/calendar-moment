@@ -8,15 +8,28 @@
 	var CM = {
 		targetMoment	: moment(settings.targetMoment, "MM-DD-YYYY") || moment(),
 		calendar		: document.getElementById(settings.id),
-		daysOfWeek		: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
+		daysOfWeek		: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
+		events			: []
 	}
 
 
- 
+ /*
+
+var events = [
+	{
+		startDate: "04-07-2016",
+		endDate: "04-12-2016",
+		title: "My Title",
+		description: "This is my description"
+	}
+]
+
+ */
 
 
 	var methods = {
-		empty0   : function(container) {
+		addEvents   : function(events) {
+			return (CM.events = events);
 		},
 		build : function(targetMoment) {
 
@@ -43,7 +56,6 @@
 			CM.currentMoment.date(CM.month.counter); // Sets the first calendar cell to the appropriate day.
 
 			console.log(CM);
-
 
 			/* Our master container element. */
 			CM.calendar.classList.add('cm');
@@ -128,6 +140,12 @@
 				if ( CM.month.counter < 1 || CM.month.counter > CM.month.daysInMonth ) {
 					tempDay.classList.add('out_of_range');
 				}
+				if (CM.events[0]) {
+					tempDay.classList.add('has_event');
+				} else {
+					tempDay.classList.add('no_event');
+				}
+
 
 				/* Add the current day node to the current week node. */
 				tempWeek.appendChild(tempDay);
@@ -195,8 +213,6 @@
 			}
 		}
 	};
-
-
 
 	methods.build( moment() );
 	//methods.empty(CM.calendar);
